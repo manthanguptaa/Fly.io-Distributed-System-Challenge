@@ -1,0 +1,2094 @@
+2024-02-14 23:01:39,504{GMT}	INFO	[jepsen test runner] jepsen.core: Command line:
+lein run test -w unique-ids --bin /Users/manthangupta/go/bin/unique-id-generator --node-count 1 --time-limit 10
+2024-02-14 23:01:39,568{GMT}	INFO	[jepsen test runner] jepsen.core: Running test:
+{:args []
+ :remote
+ #jepsen.control.retry.Remote{:remote #jepsen.control.scp.Remote{:cmd-remote #jepsen.control.sshj.SSHJRemote{:concurrency-limit 6,
+                                                                                                             :conn-spec nil,
+                                                                                                             :client nil,
+                                                                                                             :semaphore nil},
+                                                                 :conn-spec nil},
+                              :conn nil}
+ :log-net-send false
+ :node-count 1
+ :availability nil
+ :max-txn-length 4
+ :concurrency 1
+ :db
+ #object[maelstrom.db$db$reify__16142
+         "0x527e6bd3"
+         "maelstrom.db$db$reify__16142@527e6bd3"]
+ :max-writes-per-key 16
+ :leave-db-running? false
+ :name "unique-ids"
+ :logging-json? false
+ :start-time
+ #object[org.joda.time.DateTime "0x3c634a04" "2024-02-14T23:01:39.486+05:30"]
+ :nemesis-interval 10
+ :net
+ #object[maelstrom.net$jepsen_net$reify__15251
+         "0x4b48be5c"
+         "maelstrom.net$jepsen_net$reify__15251@4b48be5c"]
+ :client
+ #object[maelstrom.workload.unique_ids$client$reify__20074
+         "0x3fe8d57a"
+         "maelstrom.workload.unique_ids$client$reify__20074@3fe8d57a"]
+ :barrier
+ #object[java.util.concurrent.CyclicBarrier
+         "0x36573ec5"
+         "java.util.concurrent.CyclicBarrier@36573ec5"]
+ :log-stderr false
+ :pure-generators true
+ :ssh {:dummy? true}
+ :rate 5
+ :checker
+ #object[jepsen.checker$compose$reify__11881
+         "0x10c26161"
+         "jepsen.checker$compose$reify__11881@10c26161"]
+ :argv
+ ("test"
+  "-w"
+  "unique-ids"
+  "--bin"
+  "/Users/manthangupta/go/bin/unique-id-generator"
+  "--node-count"
+  "1"
+  "--time-limit"
+  "10")
+ :nemesis
+ (jepsen.nemesis.ReflCompose
+  {:fm {:start-partition 0,
+        :stop-partition 0,
+        :kill 1,
+        :start 1,
+        :pause 1,
+        :resume 1},
+   :nemeses [#unprintable "jepsen.nemesis.combined$partition_nemesis$reify__16416@1ef6977b"
+             #unprintable "jepsen.nemesis.combined$db_nemesis$reify__16397@674cd2da"]})
+ :nodes ["n0"]
+ :test-count 1
+ :latency {:mean 0, :dist :constant}
+ :bin "/Users/manthangupta/go/bin/unique-id-generator"
+ :generator
+ (jepsen.generator.TimeLimit
+  {:limit 10000000000,
+   :cutoff nil,
+   :gen (jepsen.generator.Any
+         {:gens [(jepsen.generator.OnThreads
+                  {:f #{:nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x34d776eb"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@34d776eb"],
+                   :gen nil})
+                 (jepsen.generator.OnThreads
+                  {:f #jepsen.generator.context.AllBut{:element :nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x60a3a0fa"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@60a3a0fa"],
+                   :gen (jepsen.generator.Stagger
+                         {:dt 400000000,
+                          :next-time nil,
+                          :gen (jepsen.generator.Repeat
+                                {:remaining -1, :gen {:f :generate}})})})]})})
+ :log-net-recv false
+ :os
+ #object[maelstrom.net$jepsen_os$reify__15254
+         "0x17734113"
+         "maelstrom.net$jepsen_os$reify__15254@17734113"]
+ :time-limit 10
+ :workload :unique-ids
+ :consistency-models [:strict-serializable]
+ :topology :grid}
+
+2024-02-14 23:01:40,412{GMT}	INFO	[jepsen node n0] maelstrom.net: Starting Maelstrom network
+2024-02-14 23:01:40,413{GMT}	INFO	[jepsen test runner] jepsen.db: Tearing down DB
+2024-02-14 23:01:40,414{GMT}	INFO	[jepsen test runner] jepsen.db: Setting up DB
+2024-02-14 23:01:40,415{GMT}	INFO	[jepsen node n0] maelstrom.service: Starting services: (lin-kv lin-tso lww-kv seq-kv)
+2024-02-14 23:01:40,416{GMT}	INFO	[jepsen node n0] maelstrom.db: Setting up n0
+2024-02-14 23:01:40,416{GMT}	INFO	[jepsen node n0] maelstrom.process: launching /Users/manthangupta/go/bin/unique-id-generator []
+2024-02-14 23:01:40,925{GMT}	INFO	[jepsen test runner] jepsen.core: Relative time begins now
+2024-02-14 23:01:40,943{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:01:40,962{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 0 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 1, :msg_id 1, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:40,965{GMT}	INFO	[jepsen worker 0] jepsen.util: 1	:invoke	:generate	nil
+2024-02-14 23:01:40,972{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 1 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 2}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 2, :msg_id 2, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:41,296{GMT}	INFO	[jepsen worker 0] jepsen.util: 2	:invoke	:generate	nil
+2024-02-14 23:01:41,306{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 2 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 3}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 3, :msg_id 3, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:41,643{GMT}	INFO	[jepsen worker 0] jepsen.util: 3	:invoke	:generate	nil
+2024-02-14 23:01:41,662{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 3 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 4}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 4, :msg_id 4, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:41,678{GMT}	INFO	[jepsen worker 0] jepsen.util: 4	:invoke	:generate	nil
+2024-02-14 23:01:41,684{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 4 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 5}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 5, :msg_id 5, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:41,688{GMT}	INFO	[jepsen worker 0] jepsen.util: 5	:invoke	:generate	nil
+2024-02-14 23:01:41,694{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 5 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 6}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 6, :msg_id 6, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:41,874{GMT}	INFO	[jepsen worker 0] jepsen.util: 6	:invoke	:generate	nil
+2024-02-14 23:01:41,886{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 6 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 7}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 7, :msg_id 7, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:41,965{GMT}	INFO	[jepsen worker 0] jepsen.util: 7	:invoke	:generate	nil
+2024-02-14 23:01:41,973{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 7 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 8}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 8, :msg_id 8, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:42,030{GMT}	INFO	[jepsen worker 0] jepsen.util: 8	:invoke	:generate	nil
+2024-02-14 23:01:42,036{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 8 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 9}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 9, :msg_id 9, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:42,304{GMT}	INFO	[jepsen worker 0] jepsen.util: 9	:invoke	:generate	nil
+2024-02-14 23:01:42,311{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 9 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 10}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 10, :msg_id 10, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:42,536{GMT}	INFO	[jepsen worker 0] jepsen.util: 10	:invoke	:generate	nil
+2024-02-14 23:01:42,550{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 10 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 11}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 11, :msg_id 11, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:42,776{GMT}	INFO	[jepsen worker 0] jepsen.util: 11	:invoke	:generate	nil
+2024-02-14 23:01:42,780{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 11 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 12}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 12, :msg_id 12, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:42,964{GMT}	INFO	[jepsen worker 0] jepsen.util: 12	:invoke	:generate	nil
+2024-02-14 23:01:42,967{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 12 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 13}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 13, :msg_id 13, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:43,043{GMT}	INFO	[jepsen worker 0] jepsen.util: 13	:invoke	:generate	nil
+2024-02-14 23:01:43,047{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 13 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 14}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 14, :msg_id 14, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:43,274{GMT}	INFO	[jepsen worker 0] jepsen.util: 14	:invoke	:generate	nil
+2024-02-14 23:01:43,284{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 14 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 15}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 15, :msg_id 15, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:43,659{GMT}	INFO	[jepsen worker 0] jepsen.util: 15	:invoke	:generate	nil
+2024-02-14 23:01:43,670{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 15 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 16}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 16, :msg_id 16, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:43,976{GMT}	INFO	[jepsen worker 0] jepsen.util: 16	:invoke	:generate	nil
+2024-02-14 23:01:43,986{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 16 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 17}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 17, :msg_id 17, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:44,072{GMT}	INFO	[jepsen worker 0] jepsen.util: 17	:invoke	:generate	nil
+2024-02-14 23:01:44,076{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 17 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 18}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 18, :msg_id 18, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:44,101{GMT}	INFO	[jepsen worker 0] jepsen.util: 18	:invoke	:generate	nil
+2024-02-14 23:01:44,104{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 18 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 19}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 19, :msg_id 19, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:44,365{GMT}	INFO	[jepsen worker 0] jepsen.util: 19	:invoke	:generate	nil
+2024-02-14 23:01:44,375{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 19 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 20}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 20, :msg_id 20, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:44,673{GMT}	INFO	[jepsen worker 0] jepsen.util: 20	:invoke	:generate	nil
+2024-02-14 23:01:44,686{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 20 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 21}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 21, :msg_id 21, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:45,075{GMT}	INFO	[jepsen worker 0] jepsen.util: 21	:invoke	:generate	nil
+2024-02-14 23:01:45,084{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 21 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 22}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 22, :msg_id 22, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:45,094{GMT}	INFO	[jepsen worker 0] jepsen.util: 22	:invoke	:generate	nil
+2024-02-14 23:01:45,099{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 22 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 23}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 23, :msg_id 23, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:45,326{GMT}	INFO	[jepsen worker 0] jepsen.util: 23	:invoke	:generate	nil
+2024-02-14 23:01:45,333{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 23 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 24}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 24, :msg_id 24, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:45,617{GMT}	INFO	[jepsen worker 0] jepsen.util: 24	:invoke	:generate	nil
+2024-02-14 23:01:45,626{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 24 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 25}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 25, :msg_id 25, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:45,675{GMT}	INFO	[jepsen worker 0] jepsen.util: 25	:invoke	:generate	nil
+2024-02-14 23:01:45,681{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 25 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 26}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 26, :msg_id 26, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:45,856{GMT}	INFO	[jepsen worker 0] jepsen.util: 26	:invoke	:generate	nil
+2024-02-14 23:01:45,865{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 26 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 27}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 27, :msg_id 27, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:46,248{GMT}	INFO	[jepsen worker 0] jepsen.util: 27	:invoke	:generate	nil
+2024-02-14 23:01:46,255{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 27 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 28}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 28, :msg_id 28, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:46,333{GMT}	INFO	[jepsen worker 0] jepsen.util: 28	:invoke	:generate	nil
+2024-02-14 23:01:46,338{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 28 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 29}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 29, :msg_id 29, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:46,591{GMT}	INFO	[jepsen worker 0] jepsen.util: 29	:invoke	:generate	nil
+2024-02-14 23:01:46,597{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 29 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 30}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 30, :msg_id 30, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:46,894{GMT}	INFO	[jepsen worker 0] jepsen.util: 30	:invoke	:generate	nil
+2024-02-14 23:01:46,903{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 30 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 31}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 31, :msg_id 31, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:47,092{GMT}	INFO	[jepsen worker 0] jepsen.util: 31	:invoke	:generate	nil
+2024-02-14 23:01:47,100{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 31 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 32}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 32, :msg_id 32, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:47,454{GMT}	INFO	[jepsen worker 0] jepsen.util: 32	:invoke	:generate	nil
+2024-02-14 23:01:47,459{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 32 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 33}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 33, :msg_id 33, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:47,470{GMT}	INFO	[jepsen worker 0] jepsen.util: 33	:invoke	:generate	nil
+2024-02-14 23:01:47,474{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 33 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 34}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 34, :msg_id 34, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:47,595{GMT}	INFO	[jepsen worker 0] jepsen.util: 34	:invoke	:generate	nil
+2024-02-14 23:01:47,603{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 34 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 35}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 35, :msg_id 35, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:47,890{GMT}	INFO	[jepsen worker 0] jepsen.util: 35	:invoke	:generate	nil
+2024-02-14 23:01:47,897{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 35 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 36}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 36, :msg_id 36, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:47,959{GMT}	INFO	[jepsen worker 0] jepsen.util: 36	:invoke	:generate	nil
+2024-02-14 23:01:47,962{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 36 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 37}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 37, :msg_id 37, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:48,211{GMT}	INFO	[jepsen worker 0] jepsen.util: 37	:invoke	:generate	nil
+2024-02-14 23:01:48,218{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 37 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 38}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 38, :msg_id 38, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:48,389{GMT}	INFO	[jepsen worker 0] jepsen.util: 38	:invoke	:generate	nil
+2024-02-14 23:01:48,397{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 38 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 39}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 39, :msg_id 39, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:48,452{GMT}	INFO	[jepsen worker 0] jepsen.util: 39	:invoke	:generate	nil
+2024-02-14 23:01:48,460{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 39 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 40}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 40, :msg_id 40, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:48,478{GMT}	INFO	[jepsen worker 0] jepsen.util: 40	:invoke	:generate	nil
+2024-02-14 23:01:48,484{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 40 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 41}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 41, :msg_id 41, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:48,874{GMT}	INFO	[jepsen worker 0] jepsen.util: 41	:invoke	:generate	nil
+2024-02-14 23:01:48,883{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 41 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 42}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 42, :msg_id 42, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:48,957{GMT}	INFO	[jepsen worker 0] jepsen.util: 42	:invoke	:generate	nil
+2024-02-14 23:01:48,965{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 42 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 43}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 43, :msg_id 43, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:49,150{GMT}	INFO	[jepsen worker 0] jepsen.util: 43	:invoke	:generate	nil
+2024-02-14 23:01:49,158{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 43 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 44}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 44, :msg_id 44, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:49,166{GMT}	INFO	[jepsen worker 0] jepsen.util: 44	:invoke	:generate	nil
+2024-02-14 23:01:49,170{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 44 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 45}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 45, :msg_id 45, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:49,375{GMT}	INFO	[jepsen worker 0] jepsen.util: 45	:invoke	:generate	nil
+2024-02-14 23:01:49,383{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 45 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 46}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 46, :msg_id 46, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:49,479{GMT}	INFO	[jepsen worker 0] jepsen.util: 46	:invoke	:generate	nil
+2024-02-14 23:01:49,486{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 46 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 47}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 47, :msg_id 47, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:49,629{GMT}	INFO	[jepsen worker 0] jepsen.util: 47	:invoke	:generate	nil
+2024-02-14 23:01:49,639{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 47 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 48}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 48, :msg_id 48, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:49,989{GMT}	INFO	[jepsen worker 0] jepsen.util: 48	:invoke	:generate	nil
+2024-02-14 23:01:49,997{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 48 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 49}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 49, :msg_id 49, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:50,105{GMT}	INFO	[jepsen worker 0] jepsen.util: 49	:invoke	:generate	nil
+2024-02-14 23:01:50,113{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 49 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 50}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 50, :msg_id 50, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:50,159{GMT}	INFO	[jepsen worker 0] jepsen.util: 50	:invoke	:generate	nil
+2024-02-14 23:01:50,163{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 50 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 51}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 51, :msg_id 51, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:50,418{GMT}	INFO	[jepsen worker 0] jepsen.util: 51	:invoke	:generate	nil
+2024-02-14 23:01:50,421{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 51 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 52}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 52, :msg_id 52, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:50,653{GMT}	INFO	[jepsen worker 0] jepsen.util: 52	:invoke	:generate	nil
+2024-02-14 23:01:50,658{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 52 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 53}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 53, :msg_id 53, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064.invoke(unique_ids.clj:31)
+	at maelstrom.workload.unique_ids$client$reify__20074.invoke_BANG_(unique_ids.clj:52)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-14 23:01:50,673{GMT}	INFO	[jepsen test runner] jepsen.core: Run complete, writing
+2024-02-14 23:01:50,773{GMT}	INFO	[jepsen node n0] maelstrom.db: Tearing down n0
+2024-02-14 23:01:52,466{GMT}	INFO	[jepsen node n0] maelstrom.net: Shutting down Maelstrom network
+2024-02-14 23:01:52,467{GMT}	INFO	[jepsen test runner] jepsen.core: Analyzing...
+2024-02-14 23:01:52,783{GMT}	INFO	[jepsen test runner] jepsen.core: Analysis complete
+2024-02-14 23:01:52,800{GMT}	INFO	[jepsen results] jepsen.store: Wrote /Users/manthangupta/Desktop/Fly.io Challenges/unique-id-generator/store/unique-ids/20240214T230139.486+0530/results.edn
+2024-02-14 23:01:52,831{GMT}	INFO	[jepsen test runner] jepsen.core: {:perf {:latency-graph {:valid? true},
+        :rate-graph {:valid? true},
+        :valid? true},
+ :timeline {:valid? true},
+ :exceptions {:valid? true,
+              :exceptions ({:count 53,
+                            :class clojure.lang.ExceptionInfo,
+                            :example #jepsen.history.Op{:index 1,
+                                                        :time 41048584,
+                                                        :type :info,
+                                                        :process 0,
+                                                        :f :generate,
+                                                        :value nil,
+                                                        :exception {:via [{:type clojure.lang.ExceptionInfo,
+                                                                           :message "Malformed RPC response. Maelstrom sent node n0 the following request:\n\n{:type \"generate\", :msg_id 1}\n\nAnd expected a response of the form:\n\n{:type (eq \"generate_ok\"), :id Any, {:k :msg_id} Int, :in_reply_to Int}\n\n... but instead received\n\n{:in_reply_to 1, :msg_id 1, :type \"generate\"}\n\nThis is malformed because:\n\n{:type (not (= \"generate_ok\" \"generate\")), :id missing-required-key}\n\nSee doc/protocol.md for more guidance.",
+                                                                           :data {:type :malformed-rpc-response,
+                                                                                  :body {:in_reply_to 1,
+                                                                                         :msg_id 1,
+                                                                                         :type "generate"}},
+                                                                           :at [slingshot.support$stack_trace
+                                                                                invoke
+                                                                                "support.clj"
+                                                                                201]}],
+                                                                    :trace [[slingshot.support$stack_trace
+                                                                             invoke
+                                                                             "support.clj"
+                                                                             201]
+                                                                            [maelstrom.client$check_body
+                                                                             invokeStatic
+                                                                             "client.clj"
+                                                                             188]
+                                                                            [maelstrom.client$check_body
+                                                                             invoke
+                                                                             "client.clj"
+                                                                             181]
+                                                                            [maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064
+                                                                             invoke
+                                                                             "unique_ids.clj"
+                                                                             31]
+                                                                            [maelstrom.workload.unique_ids$fn__20063$generate_BANG___20064
+                                                                             invoke
+                                                                             "unique_ids.clj"
+                                                                             31]
+                                                                            [maelstrom.workload.unique_ids$client$reify__20074
+                                                                             invoke_BANG_
+                                                                             "unique_ids.clj"
+                                                                             52]
+                                                                            [jepsen.client.Validate
+                                                                             invoke_BANG_
+                                                                             "client.clj"
+                                                                             83]
+                                                                            [jepsen.generator.interpreter.ClientWorker
+                                                                             invoke_BANG_
+                                                                             "interpreter.clj"
+                                                                             65]
+                                                                            [jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909
+                                                                             invoke
+                                                                             "interpreter.clj"
+                                                                             140]
+                                                                            [jepsen.generator.interpreter$spawn_worker$fn__12908
+                                                                             invoke
+                                                                             "interpreter.clj"
+                                                                             123]
+                                                                            [clojure.core$binding_conveyor_fn$fn__5823
+                                                                             invoke
+                                                                             "core.clj"
+                                                                             2047]
+                                                                            [clojure.lang.AFn
+                                                                             call
+                                                                             "AFn.java"
+                                                                             18]
+                                                                            [java.util.concurrent.FutureTask
+                                                                             run
+                                                                             "FutureTask.java"
+                                                                             317]
+                                                                            [java.util.concurrent.ThreadPoolExecutor
+                                                                             runWorker
+                                                                             "ThreadPoolExecutor.java"
+                                                                             1144]
+                                                                            [java.util.concurrent.ThreadPoolExecutor$Worker
+                                                                             run
+                                                                             "ThreadPoolExecutor.java"
+                                                                             642]
+                                                                            [java.lang.Thread
+                                                                             run
+                                                                             "Thread.java"
+                                                                             1583]],
+                                                                    :cause "Malformed RPC response. Maelstrom sent node n0 the following request:\n\n{:type \"generate\", :msg_id 1}\n\nAnd expected a response of the form:\n\n{:type (eq \"generate_ok\"), :id Any, {:k :msg_id} Int, :in_reply_to Int}\n\n... but instead received\n\n{:in_reply_to 1, :msg_id 1, :type \"generate\"}\n\nThis is malformed because:\n\n{:type (not (= \"generate_ok\" \"generate\")), :id missing-required-key}\n\nSee doc/protocol.md for more guidance.",
+                                                                    :data {:type :malformed-rpc-response,
+                                                                           :body {:in_reply_to 1,
+                                                                                  :msg_id 1,
+                                                                                  :type "generate"}}},
+                                                        :error "indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:\n\n{:type \"generate\", :msg_id 1}\n\nAnd expected a response of the form:\n\n{:type (eq \"generate_ok\"), :id Any, {:k :msg_id} Int, :in_reply_to Int}\n\n... but instead received\n\n{:in_reply_to 1, :msg_id 1, :type \"generate\"}\n\nThis is malformed because:\n\n{:type (not (= \"generate_ok\" \"generate\")), :id missing-required-key}\n\nSee doc/protocol.md for more guidance."}})},
+ :stats {:valid? false,
+         :count 53,
+         :ok-count 0,
+         :fail-count 0,
+         :info-count 53,
+         :by-f {:generate {:valid? false,
+                           :count 53,
+                           :ok-count 0,
+                           :fail-count 0,
+                           :info-count 53}}},
+ :availability {:valid? true, :ok-fraction 0.0},
+ :net {:all {:send-count 108,
+             :recv-count 108,
+             :msg-count 108,
+             :msgs-per-op 2.037736},
+       :clients {:send-count 108, :recv-count 108, :msg-count 108},
+       :servers {:send-count 0,
+                 :recv-count 0,
+                 :msg-count 0,
+                 :msgs-per-op 0.0},
+       :valid? true},
+ :workload {:valid? true,
+            :attempted-count 53,
+            :acknowledged-count 0,
+            :duplicated-count 0,
+            :duplicated {},
+            :range [nil nil]},
+ :valid? false}
+
+
+Analysis invalid! (ﾉಥ益ಥ）ﾉ ┻━┻

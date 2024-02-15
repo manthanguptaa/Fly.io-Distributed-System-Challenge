@@ -1,0 +1,4 @@
+{:index 0, :time 6154000, :type :invoke, :process 0, :f :generate, :value nil}
+{:index 1, :time 5009198167, :type :info, :process 0, :f :generate, :value nil, :error :net-timeout}
+{:index 2, :time 5009399333, :type :invoke, :process 1, :f :generate, :value nil}
+{:index 3, :time 10014251083, :type :info, :process 1, :f :generate, :value nil, :error :net-timeout}

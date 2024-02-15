@@ -1,0 +1,267 @@
+2024-02-14 23:06:26,571{GMT}	INFO	[jepsen test runner] jepsen.core: Command line:
+lein run test -w unique-ids --bin /Users/manthangupta/go/bin/unique-id-generator --node-count 1 --time-limit 10
+2024-02-14 23:06:26,625{GMT}	INFO	[jepsen test runner] jepsen.core: Running test:
+{:args []
+ :remote
+ #jepsen.control.retry.Remote{:remote #jepsen.control.scp.Remote{:cmd-remote #jepsen.control.sshj.SSHJRemote{:concurrency-limit 6,
+                                                                                                             :conn-spec nil,
+                                                                                                             :client nil,
+                                                                                                             :semaphore nil},
+                                                                 :conn-spec nil},
+                              :conn nil}
+ :log-net-send false
+ :node-count 1
+ :availability nil
+ :max-txn-length 4
+ :concurrency 1
+ :db
+ #object[maelstrom.db$db$reify__16142
+         "0x5e05064b"
+         "maelstrom.db$db$reify__16142@5e05064b"]
+ :max-writes-per-key 16
+ :leave-db-running? false
+ :name "unique-ids"
+ :logging-json? false
+ :start-time
+ #object[org.joda.time.DateTime "0x1d628a88" "2024-02-14T23:06:26.543+05:30"]
+ :nemesis-interval 10
+ :net
+ #object[maelstrom.net$jepsen_net$reify__15251
+         "0x3c634a04"
+         "maelstrom.net$jepsen_net$reify__15251@3c634a04"]
+ :client
+ #object[maelstrom.workload.unique_ids$client$reify__20074
+         "0x4b48be5c"
+         "maelstrom.workload.unique_ids$client$reify__20074@4b48be5c"]
+ :barrier
+ #object[java.util.concurrent.CyclicBarrier
+         "0x3fe8d57a"
+         "java.util.concurrent.CyclicBarrier@3fe8d57a"]
+ :log-stderr false
+ :pure-generators true
+ :ssh {:dummy? true}
+ :rate 5
+ :checker
+ #object[jepsen.checker$compose$reify__11881
+         "0x36573ec5"
+         "jepsen.checker$compose$reify__11881@36573ec5"]
+ :argv
+ ("test"
+  "-w"
+  "unique-ids"
+  "--bin"
+  "/Users/manthangupta/go/bin/unique-id-generator"
+  "--node-count"
+  "1"
+  "--time-limit"
+  "10")
+ :nemesis
+ (jepsen.nemesis.ReflCompose
+  {:fm {:start-partition 0,
+        :stop-partition 0,
+        :kill 1,
+        :start 1,
+        :pause 1,
+        :resume 1},
+   :nemeses [#unprintable "jepsen.nemesis.combined$partition_nemesis$reify__16416@10c26161"
+             #unprintable "jepsen.nemesis.combined$db_nemesis$reify__16397@1ef6977b"]})
+ :nodes ["n0"]
+ :test-count 1
+ :latency {:mean 0, :dist :constant}
+ :bin "/Users/manthangupta/go/bin/unique-id-generator"
+ :generator
+ (jepsen.generator.TimeLimit
+  {:limit 10000000000,
+   :cutoff nil,
+   :gen (jepsen.generator.Any
+         {:gens [(jepsen.generator.OnThreads
+                  {:f #{:nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x771c4015"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@771c4015"],
+                   :gen nil})
+                 (jepsen.generator.OnThreads
+                  {:f #jepsen.generator.context.AllBut{:element :nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x34d776eb"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@34d776eb"],
+                   :gen (jepsen.generator.Stagger
+                         {:dt 400000000,
+                          :next-time nil,
+                          :gen (jepsen.generator.Repeat
+                                {:remaining -1, :gen {:f :generate}})})})]})})
+ :log-net-recv false
+ :os
+ #object[maelstrom.net$jepsen_os$reify__15254
+         "0x60a3a0fa"
+         "maelstrom.net$jepsen_os$reify__15254@60a3a0fa"]
+ :time-limit 10
+ :workload :unique-ids
+ :consistency-models [:strict-serializable]
+ :topology :grid}
+
+2024-02-14 23:06:27,520{GMT}	INFO	[jepsen node n0] maelstrom.net: Starting Maelstrom network
+2024-02-14 23:06:27,521{GMT}	INFO	[jepsen test runner] jepsen.db: Tearing down DB
+2024-02-14 23:06:27,522{GMT}	INFO	[jepsen test runner] jepsen.db: Setting up DB
+2024-02-14 23:06:27,523{GMT}	INFO	[jepsen node n0] maelstrom.service: Starting services: (lin-kv lin-tso lww-kv seq-kv)
+2024-02-14 23:06:27,524{GMT}	INFO	[jepsen node n0] maelstrom.db: Setting up n0
+2024-02-14 23:06:27,524{GMT}	INFO	[jepsen node n0] maelstrom.process: launching /Users/manthangupta/go/bin/unique-id-generator []
+2024-02-14 23:06:27,954{GMT}	INFO	[jepsen test runner] jepsen.core: Relative time begins now
+2024-02-14 23:06:27,971{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:27,974{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	5557267826569677000
+2024-02-14 23:06:28,059{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:28,061{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	5652588895216274000
+2024-02-14 23:06:28,253{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:28,256{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	4329559721776763400
+2024-02-14 23:06:28,379{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:28,380{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	5944074775086623000
+2024-02-14 23:06:28,773{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:28,776{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	554002620479675650
+2024-02-14 23:06:29,178{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:29,181{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	6295890207774824000
+2024-02-14 23:06:29,509{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:29,514{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	7761110420308658000
+2024-02-14 23:06:29,729{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:29,732{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	7240866012679535000
+2024-02-14 23:06:29,771{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:29,773{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	8778066391265255000
+2024-02-14 23:06:29,790{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:29,792{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	8876240264356070000
+2024-02-14 23:06:29,848{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:29,849{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3907707087846775000
+2024-02-14 23:06:30,034{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:30,037{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3066043234727920000
+2024-02-14 23:06:30,090{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:30,092{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	7133160366838596000
+2024-02-14 23:06:30,423{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:30,426{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	4188153450635664400
+2024-02-14 23:06:30,491{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:30,493{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	8165647144326071000
+2024-02-14 23:06:30,510{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:30,511{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	6724524406008439000
+2024-02-14 23:06:30,589{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:30,590{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3955280702595437600
+2024-02-14 23:06:30,701{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:30,702{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3672421021717992000
+2024-02-14 23:06:30,720{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:30,721{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3298927339721472500
+2024-02-14 23:06:31,031{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:31,034{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	1306737092665996000
+2024-02-14 23:06:31,331{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:31,334{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	4978090046344891000
+2024-02-14 23:06:31,584{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:31,587{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	5800699510673166000
+2024-02-14 23:06:31,651{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:31,654{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3008165534280103000
+2024-02-14 23:06:31,666{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:31,667{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	745781569758632100
+2024-02-14 23:06:31,815{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:31,816{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	7479578745998360000
+2024-02-14 23:06:32,094{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:32,097{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	1811735240900101600
+2024-02-14 23:06:32,409{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:32,412{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	1295559467127940600
+2024-02-14 23:06:32,616{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:32,618{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	7936948177298403000
+2024-02-14 23:06:32,719{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:32,722{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3791688783464833500
+2024-02-14 23:06:32,806{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:32,814{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	5635558286010353000
+2024-02-14 23:06:33,065{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:33,067{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3605391955407637000
+2024-02-14 23:06:33,341{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:33,343{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3269135637085111000
+2024-02-14 23:06:33,425{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:33,426{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3434690632471065600
+2024-02-14 23:06:33,765{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:33,768{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	5422776863980501000
+2024-02-14 23:06:33,927{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:33,930{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	2135242544868299500
+2024-02-14 23:06:34,011{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:34,012{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	6505858636542735000
+2024-02-14 23:06:34,208{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:34,212{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	4730945405598105000
+2024-02-14 23:06:34,240{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:34,242{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	4360352299672046600
+2024-02-14 23:06:34,301{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:34,303{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3617607950572754400
+2024-02-14 23:06:34,533{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:34,537{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	7976929795084238000
+2024-02-14 23:06:34,599{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:34,600{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	5862809432326042000
+2024-02-14 23:06:34,851{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:34,854{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	8310724082942717000
+2024-02-14 23:06:35,089{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:35,092{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3058406594032363500
+2024-02-14 23:06:35,303{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:35,306{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	285478388699642980
+2024-02-14 23:06:35,410{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:35,411{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	8811133475627126000
+2024-02-14 23:06:35,431{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:35,432{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	5101256086673839000
+2024-02-14 23:06:35,586{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:35,588{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	3664683437873896400
+2024-02-14 23:06:35,919{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:35,922{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	2560993155940223500
+2024-02-14 23:06:36,104{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:36,107{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	5166296860282035000
+2024-02-14 23:06:36,405{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:36,407{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	618540908616465700
+2024-02-14 23:06:36,465{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:36,468{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	275178635532537900
+2024-02-14 23:06:36,725{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:36,726{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	7757993057392465000
+2024-02-14 23:06:36,925{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:36,928{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	8518147116438953000
+2024-02-14 23:06:36,951{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:36,954{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	5411718619332739000
+2024-02-14 23:06:37,214{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:37,217{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	8305285198136607000
+2024-02-14 23:06:37,399{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:37,401{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	4610008021636418000
+2024-02-14 23:06:37,483{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:37,484{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	2669696345675714600
+2024-02-14 23:06:37,816{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:generate	nil
+2024-02-14 23:06:37,819{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:generate	5532482125706353000
+2024-02-14 23:06:37,838{GMT}	INFO	[jepsen test runner] jepsen.core: Run complete, writing
+2024-02-14 23:06:37,890{GMT}	INFO	[jepsen node n0] maelstrom.db: Tearing down n0
+2024-02-14 23:06:39,573{GMT}	INFO	[jepsen node n0] maelstrom.net: Shutting down Maelstrom network
+2024-02-14 23:06:39,575{GMT}	INFO	[jepsen test runner] jepsen.core: Analyzing...
+2024-02-14 23:06:39,828{GMT}	INFO	[jepsen test runner] jepsen.core: Analysis complete
+2024-02-14 23:06:39,834{GMT}	INFO	[jepsen results] jepsen.store: Wrote /Users/manthangupta/Desktop/Fly.io Challenges/unique-id-generator/store/unique-ids/20240214T230626.543+0530/results.edn
+2024-02-14 23:06:39,859{GMT}	INFO	[jepsen test runner] jepsen.core: {:perf {:latency-graph {:valid? true},
+        :rate-graph {:valid? true},
+        :valid? true},
+ :timeline {:valid? true},
+ :exceptions {:valid? true},
+ :stats {:valid? true,
+         :count 58,
+         :ok-count 58,
+         :fail-count 0,
+         :info-count 0,
+         :by-f {:generate {:valid? true,
+                           :count 58,
+                           :ok-count 58,
+                           :fail-count 0,
+                           :info-count 0}}},
+ :availability {:valid? true, :ok-fraction 1.0},
+ :net {:all {:send-count 118,
+             :recv-count 118,
+             :msg-count 118,
+             :msgs-per-op 2.0344827},
+       :clients {:send-count 118, :recv-count 118, :msg-count 118},
+       :servers {:send-count 0,
+                 :recv-count 0,
+                 :msg-count 0,
+                 :msgs-per-op 0.0},
+       :valid? true},
+ :workload {:valid? true,
+            :attempted-count 58,
+            :acknowledged-count 58,
+            :duplicated-count 0,
+            :duplicated {},
+            :range [275178635532537900 8876240264356070000]},
+ :valid? true}
+
+
+Everything looks good! ヽ(‘ー`)ノ

@@ -1,0 +1,954 @@
+0	:invoke	:generate	nil
+0	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 1, :msg_id 1, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+1	:invoke	:generate	nil
+1	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 2}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 2, :msg_id 2, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+2	:invoke	:generate	nil
+2	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 3}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 3, :msg_id 3, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+3	:invoke	:generate	nil
+3	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 4}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 4, :msg_id 4, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+4	:invoke	:generate	nil
+4	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 5}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 5, :msg_id 5, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+5	:invoke	:generate	nil
+5	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 6}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 6, :msg_id 6, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+6	:invoke	:generate	nil
+6	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 7}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 7, :msg_id 7, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+7	:invoke	:generate	nil
+7	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 8}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 8, :msg_id 8, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+8	:invoke	:generate	nil
+8	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 9}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 9, :msg_id 9, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+9	:invoke	:generate	nil
+9	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 10}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 10, :msg_id 10, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+10	:invoke	:generate	nil
+10	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 11}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 11, :msg_id 11, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+11	:invoke	:generate	nil
+11	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 12}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 12, :msg_id 12, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+12	:invoke	:generate	nil
+12	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 13}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 13, :msg_id 13, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+13	:invoke	:generate	nil
+13	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 14}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 14, :msg_id 14, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+14	:invoke	:generate	nil
+14	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 15}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 15, :msg_id 15, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+15	:invoke	:generate	nil
+15	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 16}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 16, :msg_id 16, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+16	:invoke	:generate	nil
+16	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 17}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 17, :msg_id 17, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+17	:invoke	:generate	nil
+17	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 18}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 18, :msg_id 18, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+18	:invoke	:generate	nil
+18	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 19}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 19, :msg_id 19, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+19	:invoke	:generate	nil
+19	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 20}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 20, :msg_id 20, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+20	:invoke	:generate	nil
+20	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 21}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 21, :msg_id 21, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+21	:invoke	:generate	nil
+21	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 22}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 22, :msg_id 22, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+22	:invoke	:generate	nil
+22	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 23}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 23, :msg_id 23, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+23	:invoke	:generate	nil
+23	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 24}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 24, :msg_id 24, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+24	:invoke	:generate	nil
+24	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 25}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 25, :msg_id 25, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+25	:invoke	:generate	nil
+25	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 26}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 26, :msg_id 26, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+26	:invoke	:generate	nil
+26	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 27}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 27, :msg_id 27, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+27	:invoke	:generate	nil
+27	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 28}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 28, :msg_id 28, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+28	:invoke	:generate	nil
+28	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 29}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 29, :msg_id 29, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+29	:invoke	:generate	nil
+29	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 30}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 30, :msg_id 30, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+30	:invoke	:generate	nil
+30	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 31}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 31, :msg_id 31, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+31	:invoke	:generate	nil
+31	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 32}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 32, :msg_id 32, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+32	:invoke	:generate	nil
+32	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 33}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 33, :msg_id 33, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+33	:invoke	:generate	nil
+33	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 34}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 34, :msg_id 34, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+34	:invoke	:generate	nil
+34	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 35}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 35, :msg_id 35, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+35	:invoke	:generate	nil
+35	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 36}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 36, :msg_id 36, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+36	:invoke	:generate	nil
+36	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 37}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 37, :msg_id 37, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+37	:invoke	:generate	nil
+37	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 38}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 38, :msg_id 38, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+38	:invoke	:generate	nil
+38	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 39}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 39, :msg_id 39, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+39	:invoke	:generate	nil
+39	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 40}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 40, :msg_id 40, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+40	:invoke	:generate	nil
+40	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 41}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 41, :msg_id 41, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+41	:invoke	:generate	nil
+41	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 42}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 42, :msg_id 42, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+42	:invoke	:generate	nil
+42	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 43}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 43, :msg_id 43, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+43	:invoke	:generate	nil
+43	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 44}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 44, :msg_id 44, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+44	:invoke	:generate	nil
+44	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 45}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 45, :msg_id 45, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+45	:invoke	:generate	nil
+45	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 46}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 46, :msg_id 46, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+46	:invoke	:generate	nil
+46	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 47}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 47, :msg_id 47, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+47	:invoke	:generate	nil
+47	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 48}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 48, :msg_id 48, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+48	:invoke	:generate	nil
+48	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 49}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 49, :msg_id 49, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+49	:invoke	:generate	nil
+49	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 50}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 50, :msg_id 50, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+50	:invoke	:generate	nil
+50	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 51}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 51, :msg_id 51, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+51	:invoke	:generate	nil
+51	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 52}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 52, :msg_id 52, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
+52	:invoke	:generate	nil
+52	:info	:generate	nil	indeterminate: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "generate", :msg_id 53}
+
+And expected a response of the form:
+
+{:type (eq "generate_ok"), :id Any, {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:in_reply_to 53, :msg_id 53, :type "generate"}
+
+This is malformed because:
+
+{:type (not (= "generate_ok" "generate")), :id missing-required-key}
+
+See doc/protocol.md for more guidance.
