@@ -1,0 +1,414 @@
+0	:invoke	:read	nil
+0	:ok	:read	[]
+1	:invoke	:read	nil
+1	:ok	:read	[]
+2	:invoke	:read	nil
+2	:ok	:read	[]
+3	:invoke	:read	nil
+3	:ok	:read	[]
+4	:invoke	:read	nil
+4	:ok	:read	[]
+0	:invoke	:broadcast	0
+0	:ok	:broadcast	0
+0	:invoke	:broadcast	1
+1	:invoke	:read	nil
+1	:ok	:read	[0]
+2	:invoke	:broadcast	2
+2	:ok	:broadcast	2
+3	:invoke	:broadcast	3
+4	:invoke	:read	nil
+3	:ok	:broadcast	3
+4	:ok	:read	[0 2]
+1	:invoke	:read	nil
+1	:ok	:read	[0 2 3]
+1	:invoke	:read	nil
+1	:ok	:read	[3 0 2]
+1	:invoke	:broadcast	4
+1	:ok	:broadcast	4
+2	:invoke	:read	nil
+3	:invoke	:read	nil
+4	:invoke	:read	nil
+4	:ok	:read	[0 2 3 4]
+1	:invoke	:broadcast	5
+4	:invoke	:broadcast	6
+4	:ok	:broadcast	6
+4	:invoke	:broadcast	7
+4	:ok	:broadcast	7
+4	:invoke	:broadcast	8
+4	:ok	:broadcast	8
+4	:invoke	:read	nil
+4	:ok	:read	[2 3 4 6 7 8 0]
+4	:invoke	:broadcast	9
+4	:ok	:broadcast	9
+4	:invoke	:read	nil
+4	:ok	:read	[4 6 7 8 9 0 2 3]
+4	:invoke	:read	nil
+4	:ok	:read	[8 9 0 2 3 4 6 7]
+4	:invoke	:broadcast	10
+4	:ok	:broadcast	10
+4	:invoke	:broadcast	11
+4	:ok	:broadcast	11
+4	:invoke	:broadcast	12
+4	:ok	:broadcast	12
+4	:invoke	:broadcast	13
+4	:ok	:broadcast	13
+4	:invoke	:read	nil
+4	:ok	:read	[4 7 11 12 2 3 6 8 9 10 13 0]
+4	:invoke	:broadcast	14
+4	:ok	:broadcast	14
+4	:invoke	:read	nil
+4	:ok	:read	[4 7 11 8 14 2 12 0 3 6 9 10 13]
+4	:invoke	:broadcast	15
+4	:ok	:broadcast	15
+4	:invoke	:read	nil
+4	:ok	:read	[2 12 0 3 6 9 10 13 4 7 11 15 8 14]
+4	:invoke	:read	nil
+4	:ok	:read	[0 3 6 9 10 13 4 7 11 15 8 14 2 12]
+4	:invoke	:read	nil
+4	:ok	:read	[8 14 2 12 9 10 13 0 3 6 15 4 7 11]
+4	:invoke	:broadcast	16
+4	:ok	:broadcast	16
+4	:invoke	:read	nil
+4	:ok	:read	[8 14 16 2 12 13 0 3 6 9 10 4 7 11 15]
+4	:invoke	:read	nil
+4	:ok	:read	[8 14 16 2 12 9 10 13 0 3 6 15 4 7 11]
+4	:invoke	:read	nil
+4	:ok	:read	[2 12 0 3 6 9 10 13 4 7 11 15 8 14 16]
+4	:invoke	:broadcast	17
+4	:ok	:broadcast	17
+4	:invoke	:broadcast	18
+4	:ok	:broadcast	18
+4	:invoke	:broadcast	19
+4	:ok	:broadcast	19
+4	:invoke	:broadcast	20
+4	:ok	:broadcast	20
+4	:invoke	:broadcast	21
+4	:ok	:broadcast	21
+4	:invoke	:broadcast	22
+4	:ok	:broadcast	22
+4	:invoke	:broadcast	23
+4	:ok	:broadcast	23
+4	:invoke	:read	nil
+4	:ok	:read	[7 11 15 20 21 4 14 16 22 8 12 18 19 2 3 6 9 10 13 17 23 0]
+4	:invoke	:broadcast	24
+4	:ok	:broadcast	24
+4	:invoke	:broadcast	25
+4	:ok	:broadcast	25
+4	:invoke	:broadcast	26
+4	:ok	:broadcast	26
+4	:invoke	:broadcast	27
+4	:ok	:broadcast	27
+4	:invoke	:broadcast	28
+4	:ok	:broadcast	28
+4	:invoke	:read	nil
+4	:ok	:read	[9 15 21 24 27 8 14 16 22 12 18 19 23 0 3 6 10 13 17 28 4 7 11 20 25 26 2]
+4	:invoke	:broadcast	29
+4	:ok	:broadcast	29
+4	:invoke	:read	nil
+4	:ok	:read	[8 14 16 22 12 18 19 0 3 6 10 13 17 23 29 4 7 11 20 25 26 28 2 9 15 21 24 27]
+4	:invoke	:read	nil
+4	:ok	:read	[12 18 19 13 17 23 29 0 3 6 10 25 26 28 4 7 11 20 2 9 15 21 24 27 8 14 16 22]
+0	:info	:broadcast	1	:net-timeout
+4	:invoke	:broadcast	30
+4	:ok	:broadcast	30
+4	:invoke	:read	nil
+4	:ok	:read	[12 18 19 30 17 23 29 0 3 6 10 13 26 28 4 7 11 20 25 2 9 15 21 24 27 8 14 16 22]
+5	:invoke	:broadcast	31
+4	:invoke	:read	nil
+4	:ok	:read	[15 21 24 27 8 14 16 22 12 18 19 30 0 3 6 10 13 17 23 29 4 7 11 20 25 26 28 2 9]
+4	:invoke	:broadcast	32
+4	:ok	:broadcast	32
+4	:invoke	:read	nil
+4	:ok	:read	[12 18 19 30 29 0 3 6 10 13 17 23 4 7 11 20 25 26 28 2 9 15 21 24 27 8 14 16 22 32]
+4	:invoke	:broadcast	33
+4	:ok	:broadcast	33
+4	:invoke	:broadcast	34
+4	:ok	:broadcast	34
+4	:invoke	:read	nil
+4	:ok	:read	[2 9 33 15 21 24 27 8 14 16 22 32 12 18 19 30 29 0 3 6 10 13 17 23 4 7 11 20 25 26 28 34]
+4	:invoke	:read	nil
+4	:ok	:read	[27 15 21 24 22 32 8 14 16 30 12 18 19 10 13 17 23 29 0 3 6 20 25 26 28 4 7 11 34 2 9 33]
+2	:fail	:read	nil	:net-timeout
+3	:fail	:read	nil	:net-timeout
+1	:info	:broadcast	5	:net-timeout
+6	:invoke	:broadcast	35
+2	:invoke	:read	nil
+3	:invoke	:read	nil
+4	:invoke	:read	nil
+4	:ok	:read	[4 7 11 20 25 26 28 34 2 9 33 15 21 24 27 8 14 16 22 32 12 18 19 30 0 3 6 10 13 17 23 29]
+4	:invoke	:broadcast	36
+4	:ok	:broadcast	36
+4	:invoke	:broadcast	37
+4	:ok	:broadcast	37
+4	:invoke	:broadcast	38
+4	:ok	:broadcast	38
+4	:invoke	:read	nil
+4	:ok	:read	[38 12 18 19 30 37 17 23 29 0 3 6 10 13 26 28 36 4 7 11 20 25 34 2 9 33 15 21 24 27 8 14 16 22 32]
+4	:invoke	:broadcast	39
+4	:ok	:broadcast	39
+4	:invoke	:read	nil
+4	:ok	:read	[38 12 18 19 30 37 17 23 29 0 3 6 10 13 26 28 36 4 7 11 20 25 34 2 9 33 39 15 21 24 27 8 14 16 22 32]
+4	:invoke	:broadcast	40
+4	:ok	:broadcast	40
+4	:invoke	:broadcast	41
+4	:ok	:broadcast	41
+4	:invoke	:broadcast	42
+4	:ok	:broadcast	42
+4	:invoke	:read	nil
+4	:ok	:read	[2 9 33 39 27 15 21 24 22 32 8 14 16 30 37 38 40 42 12 18 19 10 13 17 23 29 0 3 6 20 25 26 28 36 4 7 11 41 34]
+4	:invoke	:read	nil
+4	:ok	:read	[9 33 39 15 21 24 27 8 14 16 22 32 38 40 42 12 18 19 30 37 17 23 29 0 3 6 10 13 26 28 36 4 7 11 20 25 41 34 2]
+4	:invoke	:read	nil
+4	:ok	:read	[9 33 39 15 21 24 27 32 8 14 16 22 37 38 40 42 12 18 19 30 13 17 23 29 0 3 6 10 25 26 28 36 4 7 11 20 41 34 2]
+4	:invoke	:read	nil
+4	:ok	:read	[37 38 40 42 12 18 19 30 13 17 23 29 0 3 6 10 25 26 28 36 4 7 11 20 41 34 2 9 33 39 15 21 24 27 32 8 14 16 22]
+4	:invoke	:read	nil
+4	:ok	:read	[34 2 9 33 39 15 21 24 27 8 14 16 22 32 40 42 12 18 19 30 37 38 23 29 0 3 6 10 13 17 28 36 4 7 11 20 25 26 41]
+4	:invoke	:read	nil
+4	:ok	:read	[30 37 38 40 42 12 18 19 10 13 17 23 29 0 3 6 20 25 26 28 36 4 7 11 41 34 2 9 33 39 27 15 21 24 22 32 8 14 16]
+4	:invoke	:read	nil
+4	:ok	:read	[2 9 33 39 15 21 24 27 8 14 16 22 32 12 18 19 30 37 38 40 42 0 3 6 10 13 17 23 29 4 7 11 20 25 26 28 36 41 34]
+4	:invoke	:read	nil
+4	:ok	:read	[9 33 39 27 15 21 24 22 32 8 14 16 30 37 38 40 42 12 18 19 10 13 17 23 29 0 3 6 20 25 26 28 36 4 7 11 41 34 2]
+4	:invoke	:broadcast	43
+4	:ok	:broadcast	43
+4	:invoke	:broadcast	44
+4	:ok	:broadcast	44
+4	:invoke	:broadcast	45
+4	:ok	:broadcast	45
+4	:invoke	:broadcast	46
+4	:ok	:broadcast	46
+4	:invoke	:broadcast	47
+4	:ok	:broadcast	47
+4	:invoke	:read	nil
+4	:ok	:read	[30 37 38 40 42 12 18 19 10 13 17 23 29 0 3 6 20 25 26 28 36 4 7 11 41 34 2 44 43 9 33 39 27 45 46 47 15 21 24 22 32 8 14 16]
+4	:invoke	:broadcast	48
+4	:ok	:broadcast	48
+4	:invoke	:read	nil
+4	:ok	:read	[6 10 13 17 23 29 0 3 11 20 25 26 28 36 4 7 41 34 2 44 39 43 48 9 33 24 27 45 46 47 15 21 16 22 32 8 14 19 30 37 38 40 42 12 18]
+4	:invoke	:read	nil
+4	:ok	:read	[42 12 18 19 30 37 38 40 29 0 3 6 10 13 17 23 36 4 7 11 20 25 26 28 41 34 2 44 9 33 39 43 48 15 21 24 27 45 46 47 8 14 16 22 32]
+4	:invoke	:read	nil
+4	:ok	:read	[34 2 44 9 33 39 43 48 46 47 15 21 24 27 45 8 14 16 22 32 38 40 42 12 18 19 30 37 17 23 29 0 3 6 10 13 26 28 36 4 7 11 20 25 41]
+4	:invoke	:read	nil
+4	:ok	:read	[3 6 10 13 17 23 29 0 7 11 20 25 26 28 36 4 41 34 44 2 33 39 43 48 9 21 24 27 45 46 47 15 14 16 22 32 8 18 19 30 37 38 40 42 12]
+4	:invoke	:read	nil
+4	:ok	:read	[34 2 44 39 43 48 9 33 24 27 45 46 47 15 21 16 22 32 8 14 19 30 37 38 40 42 12 18 6 10 13 17 23 29 0 3 11 20 25 26 28 36 4 7 41]
+4	:invoke	:broadcast	49
+4	:ok	:broadcast	49
+4	:invoke	:read	nil
+4	:ok	:read	[6 10 13 17 23 29 0 3 11 20 25 26 28 36 4 7 41 34 2 44 39 43 48 9 33 24 27 45 46 47 49 15 21 16 22 32 8 14 19 30 37 38 40 42 12 18]
+4	:invoke	:read	nil
+4	:ok	:read	[2 44 39 43 48 9 33 24 27 45 46 47 49 15 21 16 22 32 8 14 19 30 37 38 40 42 12 18 6 10 13 17 23 29 0 3 11 20 25 26 28 36 4 7 41 34]
+4	:invoke	:read	nil
+4	:ok	:read	[19 30 37 38 40 42 12 18 6 10 13 17 23 29 0 3 11 20 25 26 28 36 4 7 41 34 2 44 39 43 48 9 33 24 27 45 46 47 49 15 21 16 22 32 8 14]
+4	:invoke	:read	nil
+4	:ok	:read	[12 18 19 30 37 38 40 42 0 3 6 10 13 17 23 29 4 7 11 20 25 26 28 36 41 34 2 44 9 33 39 43 48 15 21 24 27 45 46 47 49 8 14 16 22 32]
+4	:invoke	:read	nil
+4	:ok	:read	[34 2 44 9 33 39 43 48 15 21 24 27 45 46 47 49 8 14 16 22 32 12 18 19 30 37 38 40 42 0 3 6 10 13 17 23 29 4 7 11 20 25 26 28 36 41]
+4	:invoke	:broadcast	50
+4	:ok	:broadcast	50
+5	:info	:broadcast	31	:net-timeout
+10	:invoke	:read	nil
+4	:invoke	:read	nil
+4	:ok	:read	[34 2 44 43 48 9 33 39 27 45 46 47 49 15 21 24 22 32 8 14 16 30 37 38 40 42 12 18 19 50 10 13 17 23 29 0 3 6 20 25 26 28 36 4 7 11 41]
+4	:invoke	:read	nil
+4	:ok	:read	[10 13 17 23 29 0 3 6 20 25 26 28 36 4 7 11 41 34 2 44 43 48 9 33 39 27 45 46 47 49 15 21 24 22 32 8 14 16 30 37 38 40 42 12 18 19 50]
+4	:invoke	:broadcast	51
+4	:ok	:broadcast	51
+4	:invoke	:broadcast	52
+4	:ok	:broadcast	52
+4	:invoke	:read	nil
+4	:ok	:read	[11 26 36 41 52 34 44 9 33 39 48 47 49 24 46 16 51 40 42 18 30 37 38 3 10 13 17 4 7 20 25 28 2 43 15 21 27 45 8 14 22 32 12 19 50 23 29 0 6]
+4	:invoke	:read	nil
+4	:ok	:read	[24 46 47 49 16 51 30 37 38 40 42 18 10 13 17 3 20 25 28 4 7 2 43 27 45 15 21 22 32 8 14 19 12 50 6 23 29 0 36 41 52 11 26 34 44 39 48 9 33]
+4	:invoke	:broadcast	53
+4	:ok	:broadcast	53
+4	:invoke	:read	nil
+4	:ok	:read	[30 37 38 40 42 18 10 13 17 3 20 25 28 4 7 2 43 27 45 15 21 22 32 8 14 19 12 50 6 23 29 0 36 41 52 11 26 34 53 44 39 48 9 33 24 46 47 49 16 51]
+4	:invoke	:broadcast	54
+4	:ok	:broadcast	54
+6	:info	:broadcast	35	:net-timeout
+2	:fail	:read	nil	:net-timeout
+4	:invoke	:read	nil
+4	:ok	:read	[22 32 8 14 12 19 50 23 29 0 6 41 52 11 26 36 34 53 44 48 9 33 39 49 24 46 47 51 16 30 37 38 40 42 18 10 13 17 3 25 28 54 4 7 20 2 43 45 15 21 27]
+3	:fail	:read	nil	:net-timeout
+4	:invoke	:read	nil
+4	:ok	:read	[16 51 40 42 18 30 37 38 3 10 13 17 4 7 20 25 28 54 2 43 15 21 27 45 8 14 22 32 12 19 50 23 29 0 6 11 26 36 41 52 34 53 44 9 33 39 48 24 46 47 49]
+11	:invoke	:broadcast	55
+2	:invoke	:broadcast	56
+3	:invoke	:broadcast	57
+4	:invoke	:read	nil
+4	:ok	:read	[8 14 22 32 12 19 50 23 29 0 6 11 26 36 41 52 34 53 44 9 33 39 48 24 46 47 49 51 16 38 40 42 18 30 37 17 3 10 13 54 4 7 20 25 28 2 43 15 21 27 45]
+4	:invoke	:broadcast	58
+4	:ok	:broadcast	58
+4	:invoke	:broadcast	59
+4	:ok	:broadcast	59
+4	:invoke	:broadcast	60
+4	:ok	:broadcast	60
+4	:invoke	:read	nil
+4	:ok	:read	[3 10 13 17 4 7 20 25 28 54 2 59 43 15 21 27 45 8 14 22 32 58 12 19 50 0 6 23 29 60 11 26 36 41 52 34 53 44 9 33 39 48 24 46 47 49 16 51 18 30 37 38 40 42]
+4	:invoke	:read	nil
+4	:ok	:read	[3 10 13 17 4 7 20 25 28 54 2 59 43 15 21 27 45 8 14 22 32 58 12 19 50 0 6 23 29 60 11 26 36 41 52 34 53 44 9 33 39 48 24 46 47 49 16 51 18 30 37 38 40 42]
+4	:invoke	:read	nil
+4	:ok	:read	[43 15 21 27 45 58 8 14 22 32 12 19 50 60 0 6 23 29 52 11 26 36 41 34 53 44 9 33 39 48 24 46 47 49 16 51 40 42 18 30 37 38 3 10 13 17 28 54 4 7 20 25 2 59]
+4	:invoke	:broadcast	61
+4	:ok	:broadcast	61
+4	:invoke	:read	nil
+4	:ok	:read	[0 6 23 29 60 11 26 36 41 52 34 53 44 9 33 39 48 61 24 46 47 49 16 51 18 30 37 38 40 42 3 10 13 17 4 7 20 25 28 54 2 59 43 15 21 27 45 8 14 22 32 58 12 19 50]
+4	:invoke	:read	nil
+4	:ok	:read	[9 33 39 48 61 24 46 47 49 16 51 18 30 37 38 40 42 3 10 13 17 4 7 20 25 28 54 2 59 43 15 21 27 45 8 14 22 32 58 12 19 50 0 6 23 29 60 11 26 36 41 52 34 53 44]
+4	:invoke	:read	nil
+4	:ok	:read	[0 6 23 29 60 11 26 36 41 52 34 53 44 9 33 39 48 61 24 46 47 49 16 51 42 18 30 37 38 40 3 10 13 17 54 4 7 20 25 28 2 59 43 15 21 27 45 8 14 22 32 58 12 19 50]
+4	:invoke	:read	nil
+4	:ok	:read	[14 22 32 58 8 19 50 12 6 23 29 60 0 26 36 41 52 11 53 34 44 33 39 48 61 9 46 47 49 24 51 16 30 37 38 40 42 18 10 13 17 3 7 20 25 28 54 4 59 2 43 21 27 45 15]
+4	:invoke	:read	nil
+4	:ok	:read	[2 59 43 15 21 27 45 8 14 22 32 58 12 19 50 0 6 23 29 60 11 26 36 41 52 34 53 44 9 33 39 48 61 24 46 47 49 16 51 18 30 37 38 40 42 3 10 13 17 4 7 20 25 28 54]
+4	:invoke	:broadcast	62
+4	:ok	:broadcast	62
+4	:invoke	:read	nil
+4	:ok	:read	[34 53 44 9 33 39 48 61 24 46 47 49 16 51 42 18 30 37 38 40 3 10 13 17 54 4 7 20 25 28 2 59 43 15 21 27 45 8 14 22 32 58 12 19 50 0 6 23 29 60 62 11 26 36 41 52]
+4	:invoke	:read	nil
+4	:ok	:read	[12 19 50 0 6 23 29 60 62 11 26 36 41 52 34 53 44 9 33 39 48 61 24 46 47 49 16 51 42 18 30 37 38 40 3 10 13 17 54 4 7 20 25 28 2 59 43 15 21 27 45 8 14 22 32 58]
+4	:invoke	:read	nil
+4	:ok	:read	[25 28 54 4 7 20 2 59 43 45 15 21 27 32 58 8 14 22 12 19 50 29 60 0 6 23 41 52 62 11 26 36 34 53 44 48 61 9 33 39 49 24 46 47 16 51 38 40 42 18 30 37 17 3 10 13]
+4	:invoke	:broadcast	63
+4	:ok	:broadcast	63
+4	:invoke	:broadcast	64
+4	:ok	:broadcast	64
+4	:invoke	:read	nil
+4	:ok	:read	[44 9 33 39 48 61 64 24 46 47 49 16 51 18 30 37 38 40 42 3 10 13 17 4 7 20 25 28 54 2 59 43 63 15 21 27 45 8 14 22 32 58 12 19 50 0 6 23 29 60 11 26 36 41 52 62 34 53]
+4	:invoke	:read	nil
+4	:ok	:read	[43 63 15 21 27 45 8 14 22 32 58 12 19 50 0 6 23 29 60 62 11 26 36 41 52 34 53 44 64 9 33 39 48 61 24 46 47 49 16 51 42 18 30 37 38 40 3 10 13 17 54 4 7 20 25 28 2 59]
+4	:invoke	:broadcast	65
+4	:ok	:broadcast	65
+4	:invoke	:read	nil
+4	:ok	:read	[16 51 40 42 18 30 37 38 3 10 13 17 28 54 4 7 20 25 2 59 43 63 15 21 27 45 58 8 14 22 32 12 19 50 60 0 6 23 29 52 62 11 26 36 41 34 53 44 65 61 64 9 33 39 48 24 46 47 49]
+4	:invoke	:read	nil
+4	:ok	:read	[2 59 43 63 15 21 27 45 8 14 22 32 58 12 19 50 0 6 23 29 60 11 26 36 41 52 62 34 53 44 65 9 33 39 48 61 64 24 46 47 49 16 51 18 30 37 38 40 42 3 10 13 17 4 7 20 25 28 54]
+4	:invoke	:broadcast	66
+4	:ok	:broadcast	66
+4	:invoke	:broadcast	67
+4	:ok	:broadcast	67
+4	:invoke	:broadcast	68
+4	:ok	:broadcast	68
+4	:invoke	:read	nil
+4	:ok	:read	[39 48 61 64 9 33 47 49 24 46 16 51 37 38 40 42 67 18 30 13 17 3 10 20 25 28 54 4 7 66 2 59 68 43 63 27 45 15 21 22 32 58 8 14 50 12 19 23 29 60 0 6 36 41 52 62 11 26 34 53 44 65]
+4	:invoke	:read	nil
+4	:ok	:read	[3 10 13 17 54 4 7 20 25 28 2 59 66 43 63 68 15 21 27 45 8 14 22 32 58 12 19 50 0 6 23 29 60 62 11 26 36 41 52 34 53 44 65 64 9 33 39 48 61 24 46 47 49 16 51 42 67 18 30 37 38 40]
+4	:invoke	:read	nil
+4	:ok	:read	[9 33 39 48 61 64 24 46 47 49 16 51 67 18 30 37 38 40 42 3 10 13 17 4 7 20 25 28 54 2 59 66 43 63 68 15 21 27 45 8 14 22 32 58 12 19 50 0 6 23 29 60 11 26 36 41 52 62 34 53 44 65]
+4	:invoke	:broadcast	69
+4	:ok	:broadcast	69
+4	:invoke	:read	nil
+4	:ok	:read	[7 20 25 28 54 4 59 66 2 63 68 43 21 27 45 15 14 22 32 58 69 8 19 50 12 6 23 29 60 0 26 36 41 52 62 11 53 34 65 44 33 39 48 61 64 9 46 47 49 24 51 16 30 37 38 40 42 67 18 10 13 17 3]
+4	:invoke	:broadcast	70
+4	:ok	:broadcast	70
+4	:invoke	:read	nil
+4	:ok	:read	[8 14 22 32 58 69 12 19 50 0 6 23 29 60 11 26 36 41 52 62 34 53 70 44 65 9 33 39 48 61 64 24 46 47 49 16 51 67 18 30 37 38 40 42 3 10 13 17 4 7 20 25 28 54 2 59 66 43 63 68 15 21 27 45]
+4	:invoke	:read	nil
+4	:ok	:read	[12 19 50 29 60 0 6 23 41 52 62 11 26 36 34 53 70 44 65 48 61 64 9 33 39 49 24 46 47 16 51 38 40 42 67 18 30 37 17 3 10 13 25 28 54 4 7 20 2 59 66 43 63 68 45 15 21 27 32 58 69 8 14 22]
+4	:invoke	:read	nil
+4	:ok	:read	[2 59 66 43 63 68 15 21 27 45 69 8 14 22 32 58 12 19 50 0 6 23 29 60 62 11 26 36 41 52 34 53 70 44 65 64 9 33 39 48 61 24 46 47 49 16 51 42 67 18 30 37 38 40 3 10 13 17 54 4 7 20 25 28]
+10	:fail	:read	nil	:net-timeout
+4	:invoke	:broadcast	71
+4	:ok	:broadcast	71
+4	:invoke	:read	nil
+4	:ok	:read	[3 10 13 17 4 7 20 25 28 54 2 59 66 43 63 68 15 21 27 45 8 14 22 32 58 69 12 19 50 0 6 23 29 60 71 11 26 36 41 52 62 34 53 70 44 65 9 33 39 48 61 64 24 46 47 49 16 51 67 18 30 37 38 40 42]
+4	:invoke	:read	nil
+4	:ok	:read	[34 53 70 44 65 64 9 33 39 48 61 24 46 47 49 16 51 42 67 18 30 37 38 40 3 10 13 17 54 4 7 20 25 28 2 59 66 43 63 68 15 21 27 45 69 8 14 22 32 58 12 19 50 0 6 23 29 60 62 71 11 26 36 41 52]
+10	:invoke	:broadcast	72
+4	:invoke	:broadcast	73
+4	:ok	:broadcast	73
+4	:invoke	:read	nil
+4	:ok	:read	[37 38 40 42 67 18 30 13 17 3 10 20 25 28 54 4 7 66 2 59 68 43 63 27 45 15 21 22 32 58 69 8 14 50 12 19 23 29 60 0 6 36 41 52 62 71 11 26 70 73 34 53 44 65 39 48 61 64 9 33 47 49 24 46 16 51]
+4	:invoke	:broadcast	74
+4	:ok	:broadcast	74
+4	:invoke	:read	nil
+4	:ok	:read	[74 34 53 70 73 44 65 61 64 9 33 39 48 24 46 47 49 16 51 40 42 67 18 30 37 38 3 10 13 17 28 54 4 7 20 25 2 59 66 43 63 68 15 21 27 45 58 69 8 14 22 32 12 19 50 60 0 6 23 29 52 62 71 11 26 36 41]
+4	:invoke	:read	nil
+4	:ok	:read	[46 47 49 24 51 16 30 37 38 40 42 67 18 10 13 17 3 7 20 25 28 54 4 59 66 2 63 68 43 21 27 45 15 14 22 32 58 69 8 19 50 12 6 23 29 60 0 26 36 41 52 62 71 11 53 70 73 74 34 65 44 33 39 48 61 64 9]
+4	:invoke	:broadcast	75
+4	:ok	:broadcast	75
+11	:info	:broadcast	55	:net-timeout
+2	:info	:broadcast	56	:net-timeout
+16	:invoke	:broadcast	76
+3	:info	:broadcast	57	:net-timeout
+7	:invoke	:read	nil
+8	:invoke	:broadcast	77
+4	:invoke	:broadcast	78
+4	:ok	:broadcast	78
+4	:invoke	:read	nil
+4	:ok	:read	[34 53 70 73 74 75 44 65 9 33 39 48 61 64 24 46 47 49 16 51 78 18 30 37 38 40 42 67 3 10 13 17 4 7 20 25 28 54 2 59 66 43 63 68 15 21 27 45 8 14 22 32 58 69 12 19 50 0 6 23 29 60 11 26 36 41 52 62 71]
+4	:invoke	:broadcast	79
+4	:ok	:broadcast	79
+4	:invoke	:read	nil
+4	:ok	:read	[34 53 70 73 74 75 44 65 9 33 39 48 61 64 24 46 47 49 16 51 18 30 37 38 40 42 67 78 3 10 13 17 4 7 20 25 28 54 79 2 59 66 43 63 68 15 21 27 45 8 14 22 32 58 69 12 19 50 0 6 23 29 60 11 26 36 41 52 62 71]
+4	:invoke	:broadcast	80
+4	:ok	:broadcast	80
+4	:invoke	:read	nil
+4	:ok	:read	[12 19 50 60 0 6 23 29 52 62 71 11 26 36 41 74 75 34 53 70 73 44 65 61 64 9 33 39 48 24 46 47 49 16 51 40 42 67 78 18 30 37 38 3 10 13 17 28 54 4 7 20 25 79 2 59 66 43 63 68 80 15 21 27 45 58 69 8 14 22 32]
+4	:invoke	:read	nil
+4	:ok	:read	[26 36 41 52 62 71 11 53 70 73 74 75 34 65 44 33 39 48 61 64 9 46 47 49 24 51 16 30 37 38 40 42 67 78 18 10 13 17 3 7 20 25 28 54 4 79 59 66 2 63 68 80 43 21 27 45 15 14 22 32 58 69 8 19 50 12 6 23 29 60 0]
+4	:invoke	:broadcast	81
+4	:ok	:broadcast	81
+4	:invoke	:read	nil
+4	:ok	:read	[79 2 59 66 43 63 68 80 15 21 27 45 8 14 22 32 58 69 12 19 50 0 6 23 29 60 71 11 26 36 41 52 62 34 53 70 73 74 75 44 65 81 9 33 39 48 61 64 24 46 47 49 16 51 67 78 18 30 37 38 40 42 3 10 13 17 4 7 20 25 28 54]
+4	:invoke	:read	nil
+4	:ok	:read	[12 19 50 0 6 23 29 60 11 26 36 41 52 62 71 34 53 70 73 74 75 44 65 81 9 33 39 48 61 64 24 46 47 49 16 51 18 30 37 38 40 42 67 78 3 10 13 17 4 7 20 25 28 54 79 2 59 66 43 63 68 80 15 21 27 45 8 14 22 32 58 69]
+4	:invoke	:broadcast	82
+4	:ok	:broadcast	82
+4	:invoke	:read	nil
+4	:ok	:read	[15 21 27 45 69 8 14 22 32 58 12 19 50 82 0 6 23 29 60 62 71 11 26 36 41 52 75 34 53 70 73 74 44 65 81 64 9 33 39 48 61 24 46 47 49 16 51 42 67 78 18 30 37 38 40 3 10 13 17 54 4 7 20 25 28 79 2 59 66 43 63 68 80]
+4	:invoke	:broadcast	83
+4	:ok	:broadcast	83
+4	:invoke	:broadcast	84
+4	:ok	:broadcast	84
+4	:invoke	:read	nil
+4	:ok	:read	[2 59 66 80 43 63 68 45 15 21 27 32 58 69 8 14 22 12 19 50 29 60 82 0 6 23 41 52 62 71 11 26 36 73 74 75 34 53 70 44 65 81 48 61 64 9 33 39 49 24 46 47 16 51 38 40 42 67 78 18 30 37 83 17 3 10 13 25 28 54 4 7 20 79 84]
+4	:invoke	:broadcast	85
+4	:ok	:broadcast	85
+4	:invoke	:read	nil
+4	:ok	:read	[79 84 2 59 66 43 63 68 80 15 21 27 45 69 8 14 22 32 58 12 19 50 82 0 6 23 29 60 62 71 11 26 36 41 52 75 85 34 53 70 73 74 44 65 81 64 9 33 39 48 61 24 46 47 49 16 51 42 67 78 18 30 37 38 40 83 3 10 13 17 54 4 7 20 25 28]
+4	:invoke	:broadcast	86
+4	:ok	:broadcast	86
+4	:invoke	:broadcast	87
+4	:ok	:broadcast	87
+4	:invoke	:broadcast	88
+4	:ok	:broadcast	88
+4	:invoke	:read	nil
+4	:ok	:read	[16 51 37 38 40 42 67 78 18 30 83 13 17 3 10 20 25 28 54 4 7 79 84 66 2 59 68 80 43 63 27 45 15 21 22 32 58 69 8 14 50 12 19 23 29 60 82 0 6 36 41 52 62 71 11 26 70 73 74 75 85 86 34 53 88 81 44 65 39 48 61 64 87 9 33 47 49 24 46]
+4	:invoke	:broadcast	89
+4	:ok	:broadcast	89
+4	:invoke	:read	nil
+4	:ok	:read	[4 7 20 25 28 54 79 84 2 59 66 43 63 68 80 15 21 27 45 8 14 22 32 58 69 12 19 50 0 6 23 29 60 82 11 26 36 41 52 62 71 34 53 70 73 74 75 85 86 88 44 65 81 9 33 39 48 61 64 87 24 46 47 49 16 51 18 30 37 38 40 42 67 78 83 89 3 10 13 17]
+4	:invoke	:read	nil
+4	:ok	:read	[15 21 27 45 8 14 22 32 58 69 12 19 50 0 6 23 29 60 82 11 26 36 41 52 62 71 86 34 53 70 73 74 75 85 88 44 65 81 9 33 39 48 61 64 87 24 46 47 49 16 51 78 18 30 37 38 40 42 67 83 89 3 10 13 17 4 7 20 25 28 54 79 84 2 59 66 43 63 68 80]
+4	:invoke	:read	nil
+4	:ok	:read	[3 10 13 17 4 7 20 25 28 54 79 84 2 59 66 43 63 68 80 15 21 27 45 8 14 22 32 58 69 12 19 50 0 6 23 29 60 82 11 26 36 41 52 62 71 34 53 70 73 74 75 85 86 88 44 65 81 9 33 39 48 61 64 87 24 46 47 49 16 51 18 30 37 38 40 42 67 78 83 89]
+4	:invoke	:read	nil
+4	:ok	:read	[10 13 17 3 7 20 25 28 54 4 84 79 59 66 2 63 68 80 43 21 27 45 15 14 22 32 58 69 8 19 50 12 6 23 29 60 82 0 26 36 41 52 62 71 11 53 70 73 74 75 85 86 34 88 65 81 44 33 39 48 61 64 87 9 46 47 49 24 51 16 30 37 38 40 42 67 78 18 89 83]
+4	:invoke	:broadcast	90
+4	:ok	:broadcast	90
+4	:invoke	:read	nil
+4	:ok	:read	[9 33 39 48 61 64 87 24 46 47 49 16 51 18 30 37 38 40 42 67 78 83 89 3 10 13 17 4 7 20 25 28 54 79 84 2 59 66 43 63 68 80 15 21 27 45 90 8 14 22 32 58 69 12 19 50 0 6 23 29 60 82 11 26 36 41 52 62 71 34 53 70 73 74 75 85 86 88 44 65 81]
+4	:invoke	:broadcast	91
+4	:ok	:broadcast	91
+4	:invoke	:read	nil
+4	:ok	:read	[24 46 47 49 16 51 67 78 18 30 37 38 40 42 83 89 3 10 13 17 4 7 20 25 28 54 79 84 91 2 59 66 43 63 68 80 15 21 27 45 90 8 14 22 32 58 69 12 19 50 0 6 23 29 60 82 71 11 26 36 41 52 62 85 86 34 53 70 73 74 75 88 44 65 81 87 9 33 39 48 61 64]
+4	:invoke	:read	nil
+4	:ok	:read	[64 87 9 33 39 48 61 24 46 47 49 16 51 42 67 78 18 30 37 38 40 83 89 3 10 13 17 54 4 7 20 25 28 79 84 91 2 59 66 43 63 68 80 15 21 27 45 90 69 8 14 22 32 58 12 19 50 82 0 6 23 29 60 62 71 11 26 36 41 52 75 85 86 34 53 70 73 74 88 44 65 81]
+10	:info	:broadcast	72	:net-timeout
+16	:info	:broadcast	76	:net-timeout
+7	:fail	:read	nil	:net-timeout
+8	:info	:broadcast	77	:net-timeout
+15	:invoke	:read	nil
+21	:invoke	:read	nil
+4	:invoke	:read	nil
+7	:invoke	:read	nil
+13	:invoke	:read	nil
+4	:ok	:read	[12 19 50 0 6 23 29 60 82 11 26 36 41 52 62 71 34 53 70 73 74 75 85 86 88 44 65 81 9 33 39 48 61 64 87 24 46 47 49 16 51 18 30 37 38 40 42 67 78 83 89 3 10 13 17 4 7 20 25 28 54 79 84 91 2 59 66 43 63 68 80 15 21 27 45 90 8 14 22 32 58 69]
+21	:fail	:read	nil	:net-timeout
+15	:fail	:read	nil	:net-timeout
+13	:fail	:read	nil	:net-timeout
+7	:fail	:read	nil	:net-timeout

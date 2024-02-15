@@ -1,0 +1,15 @@
+2024/02/15 20:57:48 Received {c1 n0 {"type":"init","node_id":"n0","node_ids":["n0","n1","n2","n3","n4"],"msg_id":1}}
+2024/02/15 20:57:48 Node n0 initialized
+2024/02/15 20:57:48 Sent {"src":"n0","dest":"c1","body":{"in_reply_to":1,"type":"init_ok"}}
+2024/02/15 20:57:48 Received {c5 n0 {"type":"topology","topology":{"n0":["n3","n1"],"n1":["n4","n2","n0"],"n2":["n1"],"n3":["n0","n4"],"n4":["n1","n3"]},"msg_id":1}}
+2024/02/15 20:57:48 Sent {"src":"n0","dest":"c5","body":{"in_reply_to":1,"type":"topology_ok"}}
+2024/02/15 20:57:48 Received {c10 n0 {"type":"read","msg_id":1}}
+2024/02/15 20:57:48 Sent {"src":"n0","dest":"c10","body":{"in_reply_to":1,"messages":[],"type":"read_ok"}}
+2024/02/15 20:57:48 Received {c10 n0 {"type":"broadcast","message":0,"msg_id":2}}
+2024/02/15 20:57:48 Sent {"src":"n0","dest":"c10","body":{"in_reply_to":2,"type":"broadcast_ok"}}
+2024/02/15 20:57:48 Sent {"src":"n0","dest":"n1","body":{"type":"broadcast","message":0}}
+2024/02/15 20:57:48 Sent {"src":"n0","dest":"n3","body":{"type":"broadcast","message":0}}
+2024/02/15 20:57:48 Sent {"src":"n0","dest":"n4","body":{"type":"broadcast","message":0}}
+2024/02/15 20:57:48 Sent {"src":"n0","dest":"n2","body":{"type":"broadcast","message":0}}
+2024/02/15 20:57:48 Received {n1 n0 {"in_reply_to":0,"type":"broadcast_ok"}}
+2024/02/15 20:57:48 No handler for {"id":36,"src":"n1","dest":"n0","body":{"in_reply_to":0,"type":"broadcast_ok"}}

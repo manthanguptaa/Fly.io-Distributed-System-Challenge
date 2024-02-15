@@ -1,0 +1,27 @@
+2024/02/15 19:22:04 Received {c3 n1 {"type":"init","node_id":"n1","node_ids":["n0","n1","n2","n3","n4"],"msg_id":1}}
+2024/02/15 19:22:04 Node n1 initialized
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"c3","body":{"in_reply_to":1,"type":"init_ok"}}
+2024/02/15 19:22:04 Received {c6 n1 {"type":"topology","topology":{"n0":["n3","n1"],"n1":["n4","n2","n0"],"n2":["n1"],"n3":["n0","n4"],"n4":["n1","n3"]},"msg_id":1}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"c6","body":{"in_reply_to":1,"type":"topology_ok"}}
+2024/02/15 19:22:04 Received {n0 n1 {"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n4","body":{"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n2","body":{"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n0","body":{"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n0","body":{"in_reply_to":0,"type":"broadcast_ok"}}
+2024/02/15 19:22:04 Received {n4 n1 {"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Received {n2 n1 {"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Received {n4 n1 {"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n4","body":{"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n2","body":{"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n0","body":{"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n4","body":{"in_reply_to":0,"type":"broadcast_ok"}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n4","body":{"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n2","body":{"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n0","body":{"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n2","body":{"in_reply_to":0,"type":"broadcast_ok"}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n4","body":{"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n2","body":{"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n0","body":{"type":"broadcast","message":0}}
+2024/02/15 19:22:04 Sent {"src":"n1","dest":"n4","body":{"in_reply_to":0,"type":"broadcast_ok"}}
+2024/02/15 19:22:04 Received {n4 n1 {"in_reply_to":0,"type":"broadcast_ok"}}
+2024/02/15 19:22:04 No handler for {"id":37,"src":"n4","dest":"n1","body":{"in_reply_to":0,"type":"broadcast_ok"}}

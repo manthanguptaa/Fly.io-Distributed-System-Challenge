@@ -1,0 +1,23 @@
+2024/02/15 20:57:48 Received {c2 n2 {"type":"init","node_id":"n2","node_ids":["n0","n1","n2","n3","n4"],"msg_id":1}}
+2024/02/15 20:57:48 Node n2 initialized
+2024/02/15 20:57:48 Sent {"src":"n2","dest":"c2","body":{"in_reply_to":1,"type":"init_ok"}}
+2024/02/15 20:57:48 Received {c7 n2 {"type":"topology","topology":{"n0":["n3","n1"],"n1":["n4","n2","n0"],"n2":["n1"],"n3":["n0","n4"],"n4":["n1","n3"]},"msg_id":1}}
+2024/02/15 20:57:48 Sent {"src":"n2","dest":"c7","body":{"in_reply_to":1,"type":"topology_ok"}}
+2024/02/15 20:57:48 Received {c12 n2 {"type":"read","msg_id":1}}
+2024/02/15 20:57:48 Sent {"src":"n2","dest":"c12","body":{"in_reply_to":1,"messages":[],"type":"read_ok"}}
+2024/02/15 20:57:48 Received {n0 n2 {"type":"broadcast","message":0}}
+2024/02/15 20:57:48 Sent {"src":"n2","dest":"n0","body":{"in_reply_to":0,"type":"broadcast_ok"}}
+2024/02/15 20:57:48 Sent {"src":"n2","dest":"n1","body":{"type":"broadcast","message":0}}
+2024/02/15 20:57:48 Sent {"src":"n2","dest":"n3","body":{"type":"broadcast","message":0}}
+2024/02/15 20:57:48 Sent {"src":"n2","dest":"n4","body":{"type":"broadcast","message":0}}
+2024/02/15 20:57:48 Received {n1 n2 {"type":"broadcast","message":0}}
+2024/02/15 20:57:48 Received {n4 n2 {"type":"broadcast","message":0}}
+2024/02/15 20:57:48 Received {n3 n2 {"type":"broadcast","message":0}}
+2024/02/15 20:57:49 Received {c12 n2 {"type":"broadcast","message":2,"msg_id":2}}
+2024/02/15 20:57:49 Sent {"src":"n2","dest":"n4","body":{"type":"broadcast","message":2}}
+2024/02/15 20:57:49 Sent {"src":"n2","dest":"n3","body":{"type":"broadcast","message":2}}
+2024/02/15 20:57:49 Sent {"src":"n2","dest":"n0","body":{"type":"broadcast","message":2}}
+2024/02/15 20:57:49 Sent {"src":"n2","dest":"c12","body":{"in_reply_to":2,"type":"broadcast_ok"}}
+2024/02/15 20:57:49 Sent {"src":"n2","dest":"n1","body":{"type":"broadcast","message":2}}
+2024/02/15 20:57:49 Received {n3 n2 {"in_reply_to":0,"type":"broadcast_ok"}}
+2024/02/15 20:57:49 No handler for {"id":61,"src":"n3","dest":"n2","body":{"in_reply_to":0,"type":"broadcast_ok"}}

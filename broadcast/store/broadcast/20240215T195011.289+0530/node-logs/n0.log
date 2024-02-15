@@ -1,0 +1,11 @@
+2024/02/15 19:50:13 Received {c4 n0 {"type":"init","node_id":"n0","node_ids":["n0","n1","n2","n3","n4"],"msg_id":1}}
+2024/02/15 19:50:13 Node n0 initialized
+2024/02/15 19:50:13 Sent {"src":"n0","dest":"c4","body":{"in_reply_to":1,"type":"init_ok"}}
+2024/02/15 19:50:13 Received {c5 n0 {"type":"topology","topology":{"n0":["n3","n1"],"n1":["n4","n2","n0"],"n2":["n1"],"n3":["n0","n4"],"n4":["n1","n3"]},"msg_id":1}}
+2024/02/15 19:50:13 Sent {"src":"n0","dest":"c5","body":{"in_reply_to":1,"type":"topology_ok"}}
+2024/02/15 19:50:13 Received {c10 n0 {"type":"broadcast","message":0,"msg_id":1}}
+2024/02/15 19:50:13 Sent {"src":"n0","dest":"c10","body":{"in_reply_to":1,"type":"broadcast_ok"}}
+2024/02/15 19:50:13 Sent {"src":"n0","dest":"n3","body":{"type":"broadcast","message":0}}
+2024/02/15 19:50:13 Sent {"src":"n0","dest":"n1","body":{"type":"broadcast","message":0}}
+2024/02/15 19:50:13 Received {n1 n0 {"in_reply_to":0,"type":"broadcast_ok"}}
+2024/02/15 19:50:13 No handler for {"id":24,"src":"n1","dest":"n0","body":{"in_reply_to":0,"type":"broadcast_ok"}}
