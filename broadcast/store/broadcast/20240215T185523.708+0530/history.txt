@@ -1,0 +1,52 @@
+0	:invoke	:broadcast	0
+0	:ok	:broadcast	0
+1	:invoke	:read	nil
+2	:invoke	:broadcast	1
+3	:invoke	:read	nil
+4	:invoke	:read	nil
+0	:invoke	:broadcast	2
+1	:fail	:read	nil	:net-timeout
+1	:invoke	:read	nil
+2	:info	:broadcast	1	:net-timeout
+7	:invoke	:broadcast	3
+3	:fail	:read	nil	:net-timeout
+3	:invoke	:broadcast	4
+4	:fail	:read	nil	:net-timeout
+4	:invoke	:broadcast	5
+0	:info	:broadcast	2	:net-timeout
+5	:invoke	:broadcast	6
+1	:fail	:read	nil	:net-timeout
+1	:invoke	:read	nil
+7	:info	:broadcast	3	:net-timeout
+12	:invoke	:broadcast	7
+3	:info	:broadcast	4	:net-timeout
+8	:invoke	:read	nil
+4	:info	:broadcast	5	:net-timeout
+5	:info	:broadcast	6	:net-timeout
+9	:invoke	:read	nil
+10	:invoke	:broadcast	8
+1	:fail	:read	nil	:net-timeout
+1	:invoke	:read	nil
+12	:info	:broadcast	7	:net-timeout
+17	:invoke	:broadcast	9
+8	:fail	:read	nil	:net-timeout
+8	:invoke	:broadcast	10
+9	:fail	:read	nil	:net-timeout
+9	:invoke	:read	nil
+10	:info	:broadcast	8	:net-timeout
+15	:invoke	:broadcast	11
+1	:fail	:read	nil	:net-timeout
+17	:info	:broadcast	9	:net-timeout
+8	:info	:broadcast	10	:net-timeout
+9	:fail	:read	nil	:net-timeout
+15	:info	:broadcast	11	:net-timeout
+13	:invoke	:read	nil
+22	:invoke	:read	nil
+9	:invoke	:read	nil
+20	:invoke	:read	nil
+1	:invoke	:read	nil
+13	:fail	:read	nil	:net-timeout
+1	:fail	:read	nil	:net-timeout
+22	:fail	:read	nil	:net-timeout
+20	:fail	:read	nil	:net-timeout
+9	:fail	:read	nil	:net-timeout

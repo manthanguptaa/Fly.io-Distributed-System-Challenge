@@ -1,0 +1,5 @@
+2024/02/15 18:29:05 Received {c0 n0 {"type":"init","node_id":"n0","node_ids":["n0"],"msg_id":1}}
+2024/02/15 18:29:05 Node n0 initialized
+2024/02/15 18:29:05 Sent {"src":"n0","dest":"c0","body":{"in_reply_to":1,"type":"init_ok"}}
+2024/02/15 18:29:05 Received {c1 n0 {"type":"topology","topology":{"n0":[]},"msg_id":1}}
+2024/02/15 18:29:05 Sent {"src":"n0","dest":"c1","body":{"in_reply_to":1,"topology":{"n0":[]},"type":"topology_ok"}}

@@ -1,0 +1,4955 @@
+2024-02-15 18:35:40,737{GMT}	INFO	[jepsen test runner] jepsen.core: Command line:
+lein run test -w broadcast --bin /Users/manthangupta/go/bin/broadcast --node-count 1 --time-limit 20 --rate 10
+2024-02-15 18:35:40,809{GMT}	INFO	[jepsen test runner] jepsen.core: Running test:
+{:args []
+ :remote
+ #jepsen.control.retry.Remote{:remote #jepsen.control.scp.Remote{:cmd-remote #jepsen.control.sshj.SSHJRemote{:concurrency-limit 6,
+                                                                                                             :conn-spec nil,
+                                                                                                             :client nil,
+                                                                                                             :semaphore nil},
+                                                                 :conn-spec nil},
+                              :conn nil}
+ :log-net-send false
+ :node-count 1
+ :availability nil
+ :max-txn-length 4
+ :concurrency 1
+ :db
+ #object[maelstrom.db$db$reify__16142
+         "0x4b48be5c"
+         "maelstrom.db$db$reify__16142@4b48be5c"]
+ :max-writes-per-key 16
+ :leave-db-running? false
+ :name "broadcast"
+ :logging-json? false
+ :start-time
+ #object[org.joda.time.DateTime "0x1ef6977b" "2024-02-15T18:35:40.718+05:30"]
+ :nemesis-interval 10
+ :net
+ #object[maelstrom.net$jepsen_net$reify__15251
+         "0x674cd2da"
+         "maelstrom.net$jepsen_net$reify__15251@674cd2da"]
+ :client
+ #object[maelstrom.workload.broadcast$client$reify__16644
+         "0x686279e0"
+         "maelstrom.workload.broadcast$client$reify__16644@686279e0"]
+ :barrier
+ #object[java.util.concurrent.CyclicBarrier
+         "0x6b28d4e4"
+         "java.util.concurrent.CyclicBarrier@6b28d4e4"]
+ :log-stderr false
+ :pure-generators true
+ :ssh {:dummy? true}
+ :rate 10.0
+ :checker
+ #object[jepsen.checker$compose$reify__11881
+         "0x41cfcbb5"
+         "jepsen.checker$compose$reify__11881@41cfcbb5"]
+ :argv
+ ("test"
+  "-w"
+  "broadcast"
+  "--bin"
+  "/Users/manthangupta/go/bin/broadcast"
+  "--node-count"
+  "1"
+  "--time-limit"
+  "20"
+  "--rate"
+  "10")
+ :nemesis
+ (jepsen.nemesis.ReflCompose
+  {:fm {:start-partition 0,
+        :stop-partition 0,
+        :kill 1,
+        :start 1,
+        :pause 1,
+        :resume 1},
+   :nemeses [#unprintable "jepsen.nemesis.combined$partition_nemesis$reify__16416@40941b54"
+             #unprintable "jepsen.nemesis.combined$db_nemesis$reify__16397@3b42d7df"]})
+ :nodes ["n0"]
+ :test-count 1
+ :latency {:mean 0, :dist :constant}
+ :bin "/Users/manthangupta/go/bin/broadcast"
+ :generator
+ ((jepsen.generator.Synchronize
+   {:gen (jepsen.generator.TimeLimit
+          {:limit 20000000000,
+           :cutoff nil,
+           :gen (jepsen.generator.Any
+                 {:gens [(jepsen.generator.OnThreads
+                          {:f #{:nemesis},
+                           :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                                   "0x704c3ca2"
+                                                   "jepsen.generator.context$make_thread_filter$lazy_filter__9167@704c3ca2"],
+                           :gen nil})
+                         (jepsen.generator.OnThreads
+                          {:f #jepsen.generator.context.AllBut{:element :nemesis},
+                           :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                                   "0x7d3a9061"
+                                                   "jepsen.generator.context$make_thread_filter$lazy_filter__9167@7d3a9061"],
+                           :gen (jepsen.generator.Stagger
+                                 {:dt 200000000,
+                                  :next-time nil,
+                                  :gen (jepsen.generator.Mix
+                                        {:i 0,
+                                         :gens [({:f :broadcast, :value 0}
+                                                 {:f :broadcast, :value 1}
+                                                 {:f :broadcast, :value 2}
+                                                 {:f :broadcast, :value 3}
+                                                 {:f :broadcast, :value 4}
+                                                 {:f :broadcast, :value 5}
+                                                 {:f :broadcast, :value 6}
+                                                 {:f :broadcast, :value 7}
+                                                 ...)
+                                                ({:f :read}
+                                                 {:f :read}
+                                                 {:f :read}
+                                                 {:f :read}
+                                                 {:f :read}
+                                                 {:f :read}
+                                                 {:f :read}
+                                                 {:f :read}
+                                                 ...)]})})})]})})})
+  (jepsen.generator.Synchronize
+   {:gen (jepsen.generator.OnThreads
+          {:f #{:nemesis},
+           :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                   "0x8d40f07"
+                                   "jepsen.generator.context$make_thread_filter$lazy_filter__9167@8d40f07"],
+           :gen ()})})
+  (jepsen.generator.Synchronize
+   {:gen {:type :log, :value "Waiting for recovery..."}})
+  (jepsen.generator.Synchronize {:gen {:type :sleep, :value 10}})
+  (jepsen.generator.Synchronize
+   {:gen (jepsen.generator.OnThreads
+          {:f #jepsen.generator.context.AllBut{:element :nemesis},
+           :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                   "0x196c8b93"
+                                   "jepsen.generator.context$make_thread_filter$lazy_filter__9167@196c8b93"],
+           :gen (jepsen.generator.EachThread
+                 {:fresh-gen {:f :read, :final? true},
+                  :context-filters #object[clojure.core$promise$reify__8591
+                                           "0x307ca947"
+                                           {:status :pending, :val nil}],
+                  :gens {}})})}))
+ :log-net-recv false
+ :os
+ #object[maelstrom.net$jepsen_os$reify__15254
+         "0x61d1315b"
+         "maelstrom.net$jepsen_os$reify__15254@61d1315b"]
+ :time-limit 20
+ :workload :broadcast
+ :consistency-models [:strict-serializable]
+ :topology :grid}
+
+2024-02-15 18:35:41,709{GMT}	INFO	[jepsen node n0] maelstrom.net: Starting Maelstrom network
+2024-02-15 18:35:41,710{GMT}	INFO	[jepsen test runner] jepsen.db: Tearing down DB
+2024-02-15 18:35:41,711{GMT}	INFO	[jepsen test runner] jepsen.db: Setting up DB
+2024-02-15 18:35:41,712{GMT}	INFO	[jepsen node n0] maelstrom.service: Starting services: (lin-kv lin-tso lww-kv seq-kv)
+2024-02-15 18:35:41,713{GMT}	INFO	[jepsen node n0] maelstrom.db: Setting up n0
+2024-02-15 18:35:41,713{GMT}	INFO	[jepsen node n0] maelstrom.process: launching /Users/manthangupta/go/bin/broadcast []
+2024-02-15 18:35:42,110{GMT}	INFO	[jepsen test runner] jepsen.core: Relative time begins now
+2024-02-15 18:35:42,136{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:broadcast	0
+2024-02-15 18:35:42,154{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 0 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 0, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:42,245{GMT}	INFO	[jepsen worker 0] jepsen.util: 1	:invoke	:broadcast	1
+2024-02-15 18:35:42,253{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 1 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 1, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:42,408{GMT}	INFO	[jepsen worker 0] jepsen.util: 2	:invoke	:read	nil
+2024-02-15 18:35:42,423{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 2 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:42,546{GMT}	INFO	[jepsen worker 0] jepsen.util: 3	:invoke	:read	nil
+2024-02-15 18:35:42,555{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 3 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:42,709{GMT}	INFO	[jepsen worker 0] jepsen.util: 4	:invoke	:broadcast	2
+2024-02-15 18:35:42,720{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 4 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 2, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:42,849{GMT}	INFO	[jepsen worker 0] jepsen.util: 5	:invoke	:read	nil
+2024-02-15 18:35:42,859{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 5 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:42,952{GMT}	INFO	[jepsen worker 0] jepsen.util: 6	:invoke	:read	nil
+2024-02-15 18:35:42,956{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 6 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:42,973{GMT}	INFO	[jepsen worker 0] jepsen.util: 7	:invoke	:broadcast	3
+2024-02-15 18:35:42,978{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 7 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 3, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:42,989{GMT}	INFO	[jepsen worker 0] jepsen.util: 8	:invoke	:broadcast	4
+2024-02-15 18:35:42,995{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 8 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 4, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:43,104{GMT}	INFO	[jepsen worker 0] jepsen.util: 9	:invoke	:broadcast	5
+2024-02-15 18:35:43,110{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 9 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 5, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:43,302{GMT}	INFO	[jepsen worker 0] jepsen.util: 10	:invoke	:read	nil
+2024-02-15 18:35:43,308{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 10 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:43,355{GMT}	INFO	[jepsen worker 0] jepsen.util: 11	:invoke	:read	nil
+2024-02-15 18:35:43,362{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 11 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:43,528{GMT}	INFO	[jepsen worker 0] jepsen.util: 12	:invoke	:broadcast	6
+2024-02-15 18:35:43,537{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 12 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 6, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:43,719{GMT}	INFO	[jepsen worker 0] jepsen.util: 13	:invoke	:broadcast	7
+2024-02-15 18:35:43,731{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 13 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 7, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:43,802{GMT}	INFO	[jepsen worker 0] jepsen.util: 14	:invoke	:read	nil
+2024-02-15 18:35:43,812{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 14 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:44,005{GMT}	INFO	[jepsen worker 0] jepsen.util: 15	:invoke	:read	nil
+2024-02-15 18:35:44,012{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 15 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:44,171{GMT}	INFO	[jepsen worker 0] jepsen.util: 16	:invoke	:broadcast	8
+2024-02-15 18:35:44,179{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 16 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 8, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:44,339{GMT}	INFO	[jepsen worker 0] jepsen.util: 17	:invoke	:broadcast	9
+2024-02-15 18:35:44,349{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 17 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 9, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:44,433{GMT}	INFO	[jepsen worker 0] jepsen.util: 18	:invoke	:broadcast	10
+2024-02-15 18:35:44,438{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 18 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 10, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:44,455{GMT}	INFO	[jepsen worker 0] jepsen.util: 19	:invoke	:read	nil
+2024-02-15 18:35:44,460{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 19 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:44,591{GMT}	INFO	[jepsen worker 0] jepsen.util: 20	:invoke	:broadcast	11
+2024-02-15 18:35:44,598{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 20 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 11, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:44,612{GMT}	INFO	[jepsen worker 0] jepsen.util: 21	:invoke	:broadcast	12
+2024-02-15 18:35:44,617{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 21 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 12, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:44,675{GMT}	INFO	[jepsen worker 0] jepsen.util: 22	:invoke	:broadcast	13
+2024-02-15 18:35:44,680{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 22 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 13, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:44,731{GMT}	INFO	[jepsen worker 0] jepsen.util: 23	:invoke	:read	nil
+2024-02-15 18:35:44,736{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 23 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:44,936{GMT}	INFO	[jepsen worker 0] jepsen.util: 24	:invoke	:broadcast	14
+2024-02-15 18:35:44,947{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 24 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 14, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:44,999{GMT}	INFO	[jepsen worker 0] jepsen.util: 25	:invoke	:broadcast	15
+2024-02-15 18:35:45,006{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 25 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 15, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:45,053{GMT}	INFO	[jepsen worker 0] jepsen.util: 26	:invoke	:broadcast	16
+2024-02-15 18:35:45,059{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 26 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 16, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:45,086{GMT}	INFO	[jepsen worker 0] jepsen.util: 27	:invoke	:read	nil
+2024-02-15 18:35:45,093{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 27 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:45,097{GMT}	INFO	[jepsen worker 0] jepsen.util: 28	:invoke	:broadcast	17
+2024-02-15 18:35:45,102{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 28 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 17, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:45,212{GMT}	INFO	[jepsen worker 0] jepsen.util: 29	:invoke	:read	nil
+2024-02-15 18:35:45,221{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 29 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:45,296{GMT}	INFO	[jepsen worker 0] jepsen.util: 30	:invoke	:read	nil
+2024-02-15 18:35:45,305{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 30 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:45,470{GMT}	INFO	[jepsen worker 0] jepsen.util: 31	:invoke	:broadcast	18
+2024-02-15 18:35:45,475{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 31 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 18, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:45,549{GMT}	INFO	[jepsen worker 0] jepsen.util: 32	:invoke	:broadcast	19
+2024-02-15 18:35:45,554{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 32 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 19, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:45,554{GMT}	INFO	[jepsen worker 0] jepsen.util: 33	:invoke	:broadcast	20
+2024-02-15 18:35:45,559{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 33 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 20, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:45,595{GMT}	INFO	[jepsen worker 0] jepsen.util: 34	:invoke	:read	nil
+2024-02-15 18:35:45,601{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 34 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:45,740{GMT}	INFO	[jepsen worker 0] jepsen.util: 35	:invoke	:broadcast	21
+2024-02-15 18:35:45,748{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 35 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 21, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:45,834{GMT}	INFO	[jepsen worker 0] jepsen.util: 36	:invoke	:read	nil
+2024-02-15 18:35:45,846{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 36 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:45,972{GMT}	INFO	[jepsen worker 0] jepsen.util: 37	:invoke	:broadcast	22
+2024-02-15 18:35:45,978{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 37 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 22, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:46,012{GMT}	INFO	[jepsen worker 0] jepsen.util: 38	:invoke	:broadcast	23
+2024-02-15 18:35:46,017{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 38 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 23, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:46,144{GMT}	INFO	[jepsen worker 0] jepsen.util: 39	:invoke	:read	nil
+2024-02-15 18:35:46,157{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 39 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:46,270{GMT}	INFO	[jepsen worker 0] jepsen.util: 40	:invoke	:broadcast	24
+2024-02-15 18:35:46,280{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 40 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 24, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:46,281{GMT}	INFO	[jepsen worker 0] jepsen.util: 41	:invoke	:broadcast	25
+2024-02-15 18:35:46,292{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 41 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 25, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:46,294{GMT}	INFO	[jepsen worker 0] jepsen.util: 42	:invoke	:read	nil
+2024-02-15 18:35:46,302{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 42 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:46,470{GMT}	INFO	[jepsen worker 0] jepsen.util: 43	:invoke	:broadcast	26
+2024-02-15 18:35:46,479{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 43 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 26, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:46,587{GMT}	INFO	[jepsen worker 0] jepsen.util: 44	:invoke	:broadcast	27
+2024-02-15 18:35:46,597{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 44 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 27, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:46,772{GMT}	INFO	[jepsen worker 0] jepsen.util: 45	:invoke	:broadcast	28
+2024-02-15 18:35:46,783{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 45 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 28, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:46,906{GMT}	INFO	[jepsen worker 0] jepsen.util: 46	:invoke	:read	nil
+2024-02-15 18:35:46,918{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 46 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:47,103{GMT}	INFO	[jepsen worker 0] jepsen.util: 47	:invoke	:read	nil
+2024-02-15 18:35:47,118{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 47 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:47,154{GMT}	INFO	[jepsen worker 0] jepsen.util: 48	:invoke	:read	nil
+2024-02-15 18:35:47,164{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 48 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:47,203{GMT}	INFO	[jepsen worker 0] jepsen.util: 49	:invoke	:broadcast	29
+2024-02-15 18:35:47,209{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 49 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 29, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:47,321{GMT}	INFO	[jepsen worker 0] jepsen.util: 50	:invoke	:broadcast	30
+2024-02-15 18:35:47,329{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 50 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 30, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:47,462{GMT}	INFO	[jepsen worker 0] jepsen.util: 51	:invoke	:read	nil
+2024-02-15 18:35:47,477{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 51 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:47,537{GMT}	INFO	[jepsen worker 0] jepsen.util: 52	:invoke	:broadcast	31
+2024-02-15 18:35:47,546{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 52 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 31, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:47,667{GMT}	INFO	[jepsen worker 0] jepsen.util: 53	:invoke	:read	nil
+2024-02-15 18:35:47,682{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 53 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:47,749{GMT}	INFO	[jepsen worker 0] jepsen.util: 54	:invoke	:read	nil
+2024-02-15 18:35:47,762{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 54 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:47,792{GMT}	INFO	[jepsen worker 0] jepsen.util: 55	:invoke	:broadcast	32
+2024-02-15 18:35:47,797{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 55 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 32, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:47,944{GMT}	INFO	[jepsen worker 0] jepsen.util: 56	:invoke	:read	nil
+2024-02-15 18:35:47,958{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 56 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:48,070{GMT}	INFO	[jepsen worker 0] jepsen.util: 57	:invoke	:read	nil
+2024-02-15 18:35:48,086{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 57 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:48,254{GMT}	INFO	[jepsen worker 0] jepsen.util: 58	:invoke	:broadcast	33
+2024-02-15 18:35:48,265{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 58 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 33, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:48,317{GMT}	INFO	[jepsen worker 0] jepsen.util: 59	:invoke	:read	nil
+2024-02-15 18:35:48,327{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 59 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:48,486{GMT}	INFO	[jepsen worker 0] jepsen.util: 60	:invoke	:read	nil
+2024-02-15 18:35:48,496{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 60 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:48,553{GMT}	INFO	[jepsen worker 0] jepsen.util: 61	:invoke	:broadcast	34
+2024-02-15 18:35:48,559{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 61 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 34, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:48,644{GMT}	INFO	[jepsen worker 0] jepsen.util: 62	:invoke	:read	nil
+2024-02-15 18:35:48,655{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 62 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:48,656{GMT}	INFO	[jepsen worker 0] jepsen.util: 63	:invoke	:read	nil
+2024-02-15 18:35:48,665{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 63 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:48,822{GMT}	INFO	[jepsen worker 0] jepsen.util: 64	:invoke	:broadcast	35
+2024-02-15 18:35:48,829{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 64 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 35, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:48,888{GMT}	INFO	[jepsen worker 0] jepsen.util: 65	:invoke	:read	nil
+2024-02-15 18:35:48,897{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 65 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:49,021{GMT}	INFO	[jepsen worker 0] jepsen.util: 66	:invoke	:broadcast	36
+2024-02-15 18:35:49,025{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 66 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 36, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:49,089{GMT}	INFO	[jepsen worker 0] jepsen.util: 67	:invoke	:broadcast	37
+2024-02-15 18:35:49,092{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 67 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 37, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:49,242{GMT}	INFO	[jepsen worker 0] jepsen.util: 68	:invoke	:read	nil
+2024-02-15 18:35:49,252{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 68 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:49,380{GMT}	INFO	[jepsen worker 0] jepsen.util: 69	:invoke	:broadcast	38
+2024-02-15 18:35:49,391{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 69 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 38, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:49,555{GMT}	INFO	[jepsen worker 0] jepsen.util: 70	:invoke	:read	nil
+2024-02-15 18:35:49,571{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 70 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:49,708{GMT}	INFO	[jepsen worker 0] jepsen.util: 71	:invoke	:broadcast	39
+2024-02-15 18:35:49,717{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 71 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 39, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:49,765{GMT}	INFO	[jepsen worker 0] jepsen.util: 72	:invoke	:read	nil
+2024-02-15 18:35:49,776{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 72 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:49,855{GMT}	INFO	[jepsen worker 0] jepsen.util: 73	:invoke	:read	nil
+2024-02-15 18:35:49,867{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 73 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:50,055{GMT}	INFO	[jepsen worker 0] jepsen.util: 74	:invoke	:broadcast	40
+2024-02-15 18:35:50,065{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 74 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 40, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:50,066{GMT}	INFO	[jepsen worker 0] jepsen.util: 75	:invoke	:read	nil
+2024-02-15 18:35:50,077{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 75 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:50,158{GMT}	INFO	[jepsen worker 0] jepsen.util: 76	:invoke	:broadcast	41
+2024-02-15 18:35:50,163{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 76 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 41, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:50,326{GMT}	INFO	[jepsen worker 0] jepsen.util: 77	:invoke	:read	nil
+2024-02-15 18:35:50,342{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 77 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:50,528{GMT}	INFO	[jepsen worker 0] jepsen.util: 78	:invoke	:read	nil
+2024-02-15 18:35:50,543{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 78 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:50,707{GMT}	INFO	[jepsen worker 0] jepsen.util: 79	:invoke	:broadcast	42
+2024-02-15 18:35:50,721{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 79 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 42, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:50,885{GMT}	INFO	[jepsen worker 0] jepsen.util: 80	:invoke	:broadcast	43
+2024-02-15 18:35:50,895{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 80 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 43, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:50,984{GMT}	INFO	[jepsen worker 0] jepsen.util: 81	:invoke	:read	nil
+2024-02-15 18:35:50,998{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 81 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:50,999{GMT}	INFO	[jepsen worker 0] jepsen.util: 82	:invoke	:broadcast	44
+2024-02-15 18:35:51,005{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 82 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 44, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:51,094{GMT}	INFO	[jepsen worker 0] jepsen.util: 83	:invoke	:broadcast	45
+2024-02-15 18:35:51,099{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 83 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "broadcast", :message 45, :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "broadcast_ok"), {:k :msg_id} Int, :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages" nil,
+  "msg_id" 0,
+  "topology" nil,
+  "type" "broadcast_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$fn__16565$broadcast_BANG___16566.invoke(broadcast.clj:27)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:203)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:51,176{GMT}	INFO	[jepsen worker 0] jepsen.util: 84	:invoke	:read	nil
+2024-02-15 18:35:51,190{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 84 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:51,243{GMT}	INFO	[jepsen worker 0] jepsen.util: 85	:invoke	:read	nil
+2024-02-15 18:35:51,255{GMT}	WARN	[jepsen worker 0] jepsen.generator.interpreter: Process 85 crashed
+clojure.lang.ExceptionInfo: Malformed RPC response. Maelstrom sent node n0 the following request:
+
+{:type "read", :msg_id 1}
+
+And expected a response of the form:
+
+{:type (eq "read_ok"),
+ :messages [Any],
+ {:k :msg_id} Int,
+ :in_reply_to Int}
+
+... but instead received
+
+{:body
+ {"echo" "",
+  "message" 0,
+  "messages"
+  [0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0],
+  "msg_id" 0,
+  "topology" nil,
+  "type" "read_ok"},
+ :dest "",
+ :in_reply_to 1,
+ :src ""}
+
+This is malformed because:
+
+{:type missing-required-key,
+ :messages missing-required-key,
+ :body disallowed-key,
+ :dest disallowed-key,
+ :src disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$check_body.invokeStatic(client.clj:188)
+	at maelstrom.client$check_body.invoke(client.clj:181)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$fn__16576$read__16577.invoke(broadcast.clj:34)
+	at maelstrom.workload.broadcast$client$reify__16644.invoke_BANG_(broadcast.clj:207)
+	at jepsen.client.Validate.invoke_BANG_(client.clj:83)
+	at jepsen.generator.interpreter.ClientWorker.invoke_BANG_(interpreter.clj:65)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908$fn__12909.invoke(interpreter.clj:140)
+	at jepsen.generator.interpreter$spawn_worker$fn__12908.invoke(interpreter.clj:123)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-15 18:35:51,438{GMT}	INFO	[Jepsen shutdown hook] jepsen.core: Downloading DB logs before JVM shutdown...
